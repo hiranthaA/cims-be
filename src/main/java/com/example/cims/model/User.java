@@ -1,9 +1,11 @@
 package com.example.cims.model;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Entity
 public class User {
 
     @Id
@@ -16,7 +18,6 @@ public class User {
     private String email;
     private String phone;
     private String address;
-    private String password;
 
     public int getId() {
         return id;
@@ -82,11 +83,4 @@ public class User {
         this.address = address;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }
