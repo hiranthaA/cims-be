@@ -1,4 +1,4 @@
-package com.example.cims.model;
+package com.example.cims.Entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,6 +10,7 @@ public class Login {
     private String username;
     private String password;
     private int userId;
+    private String role;
 
     public String getUsername() {
         return username;
@@ -33,5 +34,13 @@ public class Login {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

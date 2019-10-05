@@ -1,31 +1,15 @@
 package com.example.cims.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+public class RegData {
     private String nic;
     private String title;
-    private String firstname;
-    private String lastname;
+    private String fname;
+    private String lname;
     private String email;
     private String phone;
     private String address;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    private String password;
+    private String role;
 
     public String getNic() {
         return nic;
@@ -43,20 +27,20 @@ public class User {
         this.title = title;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFname() {
+        return fname;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFname(String fname) {
+        this.fname = fname;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLname() {
+        return lname;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLname(String lname) {
+        this.lname = lname;
     }
 
     public String getEmail() {
@@ -83,4 +67,19 @@ public class User {
         this.address = address;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

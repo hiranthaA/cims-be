@@ -1,8 +1,9 @@
 package com.example.cims.controller;
 
+import com.example.cims.model.AuthData;
 import com.example.cims.model.RegData;
 import com.example.cims.model.Response;
-import com.example.cims.service.UserService;
+import com.example.cims.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,22 +12,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/auth")
+public class AuthController {
 
     @Autowired
-    private UserService userService;
+    private AuthService authService;
 
-    @RequestMapping(value = "/register", method= RequestMethod.POST)
-    public ResponseEntity<Response> register(@RequestBody RegData regdata){
-        return  userService.register(regdata);
+    @RequestMapping(value = "/authenticate", method= RequestMethod.POST)
+    public ResponseEntity<Response> authenticate(@RequestBody AuthData authdata){
+        return  authService.authenticate(authdata);
     }
-
-    @RequestMapping(value = "/getall", method= RequestMethod.GET)
-    public ResponseEntity<Response> register(){
-        return  userService.getAll();
-    }
-
-
 
 }
