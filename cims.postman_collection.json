@@ -142,7 +142,7 @@
 			"name": "GetFavourites",
 			"request": {
 				"url": {
-					"raw": "localhost:4000/favourite/getfav?userid=23&filter=all",
+					"raw": "localhost:4000/favourite/getfav?userid=1&filter=all",
 					"host": [
 						"localhost"
 					],
@@ -154,7 +154,7 @@
 					"query": [
 						{
 							"key": "userid",
-							"value": "23",
+							"value": "1",
 							"equals": true,
 							"description": ""
 						},
@@ -171,6 +171,166 @@
 				"header": [],
 				"body": {},
 				"description": "Query params\n-------------\nuserid\nfilter : cars | parts | all\n\n\nlocalhost:4000/favourite/getfav?userid=23&filter=all\n\nlocalhost:4000/favourite/getfav?userid=23&filter=parts\n\nlocalhost:4000/favourite/getfav?userid=23&filter=cars"
+			},
+			"response": []
+		},
+		{
+			"name": "getAllInventory",
+			"request": {
+				"url": {
+					"raw": "localhost:4000/inventory/get?filter=all",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"inventory",
+						"get"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "all",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "request params\nfilter : all | cars | parts\n\nlocalhost:4000/inventory/get?filter=all\nlocalhost:4000/inventory/get?filter=cars\nlocalhost:4000/inventory/get?filter=parts"
+			},
+			"response": []
+		},
+		{
+			"name": "getInventoryItem",
+			"request": {
+				"url": {
+					"raw": "localhost:4000/inventory/getitem?id=7",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"inventory",
+						"getitem"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "7",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "parameters\n-------------\nid : this is the inventory id"
+			},
+			"response": []
+		},
+		{
+			"name": "getUserDetails",
+			"request": {
+				"url": {
+					"raw": "localhost:4000/user/get?userid=25",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"user",
+						"get"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "25",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "parameters\n---------\n\nuserid"
+			},
+			"response": []
+		},
+		{
+			"name": "AddToCart",
+			"request": {
+				"url": "localhost:4000/cart/add",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user_id\":\"23\",\n\t\"inv_id\":\"8\",\n\t\"quantity\":\"2\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "RemoveFromCart",
+			"request": {
+				"url": "localhost:4000/cart/remove",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user_id\":\"23\",\n\t\"inv_id\":\"8\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllCartItems",
+			"request": {
+				"url": {
+					"raw": "localhost:4000/cart/get?userid=23",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"cart",
+						"get"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "23",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
 			},
 			"response": []
 		}

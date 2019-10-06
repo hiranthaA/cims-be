@@ -32,6 +32,8 @@ public class CartController {
 
     /**
      * fetch all cart items
+     *
+     * @Param userid User related to the cart
      */
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public ResponseEntity<Response> getAllCartItems(@RequestParam(required = true) int userid){

@@ -49,8 +49,36 @@ CREATE TABLE `car` (
 
 LOCK TABLES `car` WRITE;
 /*!40000 ALTER TABLE `car` DISABLE KEYS */;
-INSERT INTO `car` VALUES (5,'ABC-1234','Toyota','Supra',2020,'Red',2503,NULL,'Used, Second Owner.',9500000,1000000,4),(11,'XY-5567','Nissan','GTR',2015,'Black',23568,NULL,'Used, Third Owner.',5500000,1500000,10),(21,'PQR-1133','Mclaren','720s',2018,'Orange',500,NULL,'Brand New, All Options',10500000,4000000,20);
+INSERT INTO `car` VALUES (5,'ABC-1234','Toyota','Supra',2020,'Red',2503,NULL,'Used, Second Owner.',9500000,1000000,4),(11,'XY-5567','Nissan','GTR',2015,'Black',23568,NULL,'Used, Third Owner.',5500000,1500000,10),(21,'PQR-1133','Mclaren','720s',2018,'Orange',500,NULL,'Brand New, All Options',10500000,4000000,20),(37,'QW-4356','Toyota','Corolla',2002,'White',89000,NULL,'Used, Second Owner.',1500000,500000,36);
 /*!40000 ALTER TABLE `car` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cart`
+--
+
+DROP TABLE IF EXISTS `cart`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cart` (
+  `user_id` int(11) NOT NULL,
+  `inv_id` int(11) NOT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  PRIMARY KEY (`user_id`,`inv_id`),
+  KEY `fk_cart_inventory` (`inv_id`),
+  CONSTRAINT `fk_cart_inventory` FOREIGN KEY (`inv_id`) REFERENCES `inventory` (`inv_id`),
+  CONSTRAINT `fk_cart_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cart`
+--
+
+LOCK TABLES `cart` WRITE;
+/*!40000 ALTER TABLE `cart` DISABLE KEYS */;
+INSERT INTO `cart` VALUES (1,8,2),(23,4,1),(23,6,7),(23,8,3);
+/*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -78,7 +106,7 @@ CREATE TABLE `favourite` (
 
 LOCK TABLES `favourite` WRITE;
 /*!40000 ALTER TABLE `favourite` DISABLE KEYS */;
-INSERT INTO `favourite` VALUES (12,1,10),(19,1,6),(22,1,20),(24,23,20);
+INSERT INTO `favourite` VALUES (12,1,10),(22,1,20),(24,23,20),(27,1,6),(35,1,4),(38,23,36);
 /*!40000 ALTER TABLE `favourite` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -100,7 +128,7 @@ CREATE TABLE `hibernate_sequence` (
 
 LOCK TABLES `hibernate_sequence` WRITE;
 /*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
-INSERT INTO `hibernate_sequence` VALUES (25);
+INSERT INTO `hibernate_sequence` VALUES (39);
 /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,6 +145,7 @@ CREATE TABLE `inventory` (
   `exp_on` datetime DEFAULT NULL,
   `item_type` varchar(10) DEFAULT NULL,
   `stock` int(11) DEFAULT NULL,
+  `state` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`inv_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -127,7 +156,7 @@ CREATE TABLE `inventory` (
 
 LOCK TABLES `inventory` WRITE;
 /*!40000 ALTER TABLE `inventory` DISABLE KEYS */;
-INSERT INTO `inventory` VALUES (4,'2019-10-05 19:15:30',NULL,'car',1),(6,'2019-10-05 19:38:47',NULL,'part',25),(8,'2019-10-05 19:44:41',NULL,'part',5),(10,'2019-10-05 19:51:38',NULL,'car',1),(20,'2019-10-05 22:00:47',NULL,'car',1);
+INSERT INTO `inventory` VALUES (4,'2019-10-05 19:15:30',NULL,'car',1,'available'),(6,'2019-10-05 19:38:47',NULL,'part',25,'available'),(8,'2019-10-05 19:44:41',NULL,'part',50,'available'),(10,'2019-10-05 19:51:38',NULL,'car',1,'available'),(20,'2019-10-05 22:00:47',NULL,'car',1,'available'),(36,'2019-10-06 21:25:19',NULL,'car',1,'available');
 /*!40000 ALTER TABLE `inventory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,7 +182,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES ('hiranthaathapaththu@gmail.com','123456','admin',1),('chathurya@gmail.com','123456','cust',23);
+INSERT INTO `login` VALUES ('hiranthaathapaththu@gmail.com','123456','admin',1),('chathurya@gmail.com','123456','cust',23),('geeth@gmail.com','123456','admin',25);
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -298,7 +327,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Mr','Hirantha','Athapaththu','941090230V','hiranthaathapaththu@gmail.com','0769065565','Ithanawaththa,Kurunegala'),(23,'Ms','Chathurya','Athapaththu','123456789V','chathurya@gmail.com','0712345671','Malkaduwava,Kurunegala');
+INSERT INTO `user` VALUES (1,'Mr','Hirantha','Athapaththu','941090230V','hiranthaathapaththu@gmail.com','0769065565','Ithanawaththa,Kurunegala'),(23,'Ms','Chathurya','Athapaththu','123456789V','chathurya@gmail.com','0712345671','Malkaduwava,Kurunegala'),(25,'Mr','Geeth','Sameera','941093333V','geeth@gmail.com','0789685457','Kuliyapitiya,Kurunegala');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -319,4 +348,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-06 12:14:19
+-- Dump completed on 2019-10-07  0:45:56
