@@ -80,7 +80,7 @@ public class InventoryServiceImpl implements InventoryService {
         Response response = new Response();
         CarInventoryResult carInventoryResult;
         PartInventoryResult partInventoryResult;
-        InventoryFilter inventoryFilter = new InventoryFilter();
+        InventoryListFilter inventoryListFilter = new InventoryListFilter();
         List<CarInventoryResult> carInventoryResultList = new ArrayList<>();
         List<PartInventoryResult> partInventoryResultList = new ArrayList<>();
 
@@ -90,7 +90,7 @@ public class InventoryServiceImpl implements InventoryService {
                 for(Object[] car : returned){
                     carInventoryResult = new CarInventoryResult((int)car[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[1]),(car[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[2]),(String)car[3],(int)car[4],(int)car[5],(String)car[6],(String)car[7],(String)car[8],(int)car[9],(String)car[10],(int)car[11],(String)car[12],(String)car[13],(int)car[14],(int)car[15]);
                     carInventoryResultList.add(carInventoryResult);
-                    inventoryFilter.setCars(carInventoryResultList);
+                    inventoryListFilter.setCars(carInventoryResultList);
 
                 }
             }
@@ -99,7 +99,7 @@ public class InventoryServiceImpl implements InventoryService {
                 for(Object[] part : returned){
                     partInventoryResult = new PartInventoryResult((int)part[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[1]),(part[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[2]),(String)part[3],(int)part[4],(int)part[5],(String)part[6],(String)part[7],(String)part[8],(String)part[9],(int)part[10]);
                     partInventoryResultList.add(partInventoryResult);
-                    inventoryFilter.setParts(partInventoryResultList);
+                    inventoryListFilter.setParts(partInventoryResultList);
                 }
             }
             else if(filter.equals("all")){
@@ -107,20 +107,20 @@ public class InventoryServiceImpl implements InventoryService {
                 for(Object[] car : carsReturned){
                     carInventoryResult = new CarInventoryResult((int)car[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[1]),(car[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[2]),(String)car[3],(int)car[4],(int)car[5],(String)car[6],(String)car[7],(String)car[8],(int)car[9],(String)car[10],(int)car[11],(String)car[12],(String)car[13],(int)car[14],(int)car[15]);
                     carInventoryResultList.add(carInventoryResult);
-                    inventoryFilter.setCars(carInventoryResultList);
+                    inventoryListFilter.setCars(carInventoryResultList);
                 }
                 List<Object[]> partsReturned = inventoryRepository.getAllInventoryParts("part");
                 for(Object[] part : partsReturned){
                     partInventoryResult = new PartInventoryResult((int)part[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[1]),(part[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[2]),(String)part[3],(int)part[4],(int)part[5],(String)part[6],(String)part[7],(String)part[8],(String)part[9],(int)part[10]);
                     partInventoryResultList.add(partInventoryResult);
-                    inventoryFilter.setParts(partInventoryResultList);
+                    inventoryListFilter.setParts(partInventoryResultList);
                 }
             }
             else{
                 response.setMsg("Sorry! Invalid Filter.");
                 return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
             }
-            response.setData(inventoryFilter);
+            response.setData(inventoryListFilter);
             response.setMsg("Items successfully retrieved from inventory.");
             return new ResponseEntity<Response>(response, HttpStatus.OK);
         }
@@ -133,7 +133,36 @@ public class InventoryServiceImpl implements InventoryService {
     @Override
     public ResponseEntity<Response> getInventoryItem(int id) {
         Response response = new Response();
-//        inventoryRepository.findByInv_id(25);
-        return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        CarInventoryResult carInventoryResult;
+        PartInventoryResult partInventoryResult;
+        InventoryItemFilter inventoryItemFilter = new InventoryItemFilter();
+
+        try{
+            Inventory item = inventoryRepository.findByInvid(id);
+            if(item==null){
+                response.setMsg("Sorry! Item not found.");
+                return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
+            }
+            else if(item.getItemtype().equals("car")){
+                Object[] car = inventoryRepository.getInventoryCar("car",id).get(0);
+                carInventoryResult = new CarInventoryResult((int)car[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[1]),(car[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[2]),(String)car[3],(int)car[4],(int)car[5],(String)car[6],(String)car[7],(String)car[8],(int)car[9],(String)car[10],(int)car[11],(String)car[12],(String)car[13],(int)car[14],(int)car[15]);
+                inventoryItemFilter.setCar(carInventoryResult);
+                response.setData(inventoryItemFilter);
+                response.setMsg("Inventory item found.");
+                return new ResponseEntity<Response>(response, HttpStatus.OK);
+            }
+            else {
+                Object[] part = inventoryRepository.getInventoryPart("part",id).get(0);
+                partInventoryResult = new PartInventoryResult((int)part[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[1]),(part[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[2]),(String)part[3],(int)part[4],(int)part[5],(String)part[6],(String)part[7],(String)part[8],(String)part[9],(int)part[10]);
+                inventoryItemFilter.setPart(partInventoryResult);
+                response.setData(inventoryItemFilter);
+                response.setMsg("Inventory item found.");
+                return new ResponseEntity<Response>(response, HttpStatus.OK);
+            }
+        }
+        catch (Exception e){
+            response.setMsg("Sorry! An Exception Occured.");
+            return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

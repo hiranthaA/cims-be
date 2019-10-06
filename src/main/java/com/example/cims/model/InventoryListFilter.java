@@ -2,7 +2,7 @@ package com.example.cims.model;
 
 import java.util.List;
 
-public class InventoryFilter {
+public class InventoryListFilter {
     private List<CarInventoryResult> cars;
     private List<PartInventoryResult> parts;
 
