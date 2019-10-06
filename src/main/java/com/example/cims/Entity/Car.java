@@ -1,42 +1,44 @@
 package com.example.cims.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int car_id;
-    private String plate_no;
+    @Column(name="car_id")
+    private int carid;
+    @Column(name="plate_no")
+    private String plateno;
     private String brand;
     private String model;
-    private int prod_yr;
+    @Column(name="prod_yr")
+    private int prodyr;
     private String color;
     private int mileage;
     private String photo;
     private String description;
     private int price;
-    private int down_payment;
-    private int inv_id;
+    @Column(name="down_payment")
+    private int downpayment;
+    @Column(name="inv_id")
+    private int invid;
 
-    public int getCar_id() {
-        return car_id;
+    public int getCarid() {
+        return carid;
     }
 
-    public void setCar_id(int car_id) {
-        this.car_id = car_id;
+    public void setCarid(int carid) {
+        this.carid = carid;
     }
 
-    public String getPlate_no() {
-        return plate_no;
+    public String getPlateno() {
+        return plateno;
     }
 
-    public void setPlate_no(String plate_no) {
-        this.plate_no = plate_no;
+    public void setPlateno(String plateno) {
+        this.plateno = plateno;
     }
 
     public String getBrand() {
@@ -55,12 +57,12 @@ public class Car {
         this.model = model;
     }
 
-    public int getProd_yr() {
-        return prod_yr;
+    public int getProdyr() {
+        return prodyr;
     }
 
-    public void setProd_yr(int prod_yr) {
-        this.prod_yr = prod_yr;
+    public void setProdyr(int prodyr) {
+        this.prodyr = prodyr;
     }
 
     public String getColor() {
@@ -103,19 +105,19 @@ public class Car {
         this.price = price;
     }
 
-    public int getDown_payment() {
-        return down_payment;
+    public int getDownpayment() {
+        return downpayment;
     }
 
-    public void setDown_payment(int down_payment) {
-        this.down_payment = down_payment;
+    public void setDownpayment(int downpayment) {
+        this.downpayment = downpayment;
     }
 
-    public int getInv_id() {
-        return inv_id;
+    public int getInvid() {
+        return invid;
     }
 
-    public void setInv_id(int inv_id) {
-        this.inv_id = inv_id;
+    public void setInvid(int invid) {
+        this.invid = invid;
     }
 }

@@ -23,7 +23,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/getall", method= RequestMethod.GET)
-    public ResponseEntity<Response> register(){
+    public ResponseEntity<Response> getAll(){
         return  userService.getAll();
     }
 

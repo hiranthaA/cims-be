@@ -11,16 +11,16 @@ import java.util.List;
 @Repository
 public interface InventoryRepository extends JpaRepository<Inventory,Integer> {
 
-    @Query("select i.inv_id as inv_id, i.added_on as added_on, i.exp_on as exp_on, i.item_type as item_type, i.stock as stock, c.car_id as car_id, c.plate_no as plate_no, c.brand as brand, c.model as model, c.prod_yr as prod_yr, c.color as color, c.mileage as mileage, c.photo as photo, c.description as description, c.price as price, c.down_payment as down_payment from Inventory i, Car c where i.inv_id=c.inv_id and i.item_type=:filter")
+    @Query("select i.invid, i.addedon, i.expon, i.itemtype, i.stock, c.carid, c.plateno, c.brand, c.model, c.prodyr, c.color, c.mileage, c.photo, c.description, c.price, c.downpayment from Inventory i, Car c where i.invid=c.invid and i.itemtype=:filter")
     List<Object[]> getAllInventoryCars(@Param("filter") String filter);
 
-    @Query("select i.inv_id, i.added_on, i.exp_on, i.item_type, i.stock, p.part_id, p.part_name, p.brand, p.photo, p.description, p.price from Inventory i, Part p where i.inv_id=p.inv_id and i.item_type=:filter")
+    @Query("select i.invid, i.addedon, i.expon, i.itemtype, i.stock, p.partid, p.partname, p.brand, p.photo, p.description, p.price from Inventory i, Part p where i.invid=p.invid and i.itemtype=:filter")
     List<Object[]> getAllInventoryParts(@Param("filter") String filter);
 
-    @Query("select i.inv_id as inv_id, i.added_on as added_on, i.exp_on as exp_on, i.item_type as item_type, i.stock as stock, c.car_id as car_id, c.plate_no as plate_no, c.brand as brand, c.model as model, c.prod_yr as prod_yr, c.color as color, c.mileage as mileage, c.photo as photo, c.description as description, c.price as price, c.down_payment as down_payment from Inventory i, Car c where i.inv_id=c.inv_id and i.item_type=:filter and i.inv_id=:id")
+    @Query("select i.invid, i.addedon, i.expon, i.itemtype, i.stock, c.carid, c.plateno, c.brand, c.model, c.prodyr, c.color, c.mileage, c.photo, c.description, c.price, c.downpayment from Inventory i, Car c where i.invid=c.invid and i.itemtype=:filter and i.invid=:id")
     List<Object> getInventoryCar(@Param("filter") String filter, @Param("id") int id);
 
-    @Query("select i.inv_id, i.added_on, i.exp_on, i.item_type, i.stock, p.part_id, p.part_name, p.brand, p.photo, p.description, p.price from Inventory i, Part p where i.inv_id=p.inv_id and i.item_type=:filter and i.inv_id=:id")
+    @Query("select i.invid, i.addedon, i.expon, i.itemtype, i.stock, p.partid, p.partname, p.brand, p.photo, p.description, p.price from Inventory i, Part p where i.invid=p.invid and i.itemtype=:filter and i.invid=:id")
     List<Object> getInventoryPart(@Param("filter") String filter, @Param("id") int id);
 
 //    Inventory findByInv_id(int inv_id);

@@ -1,51 +1,52 @@
 package com.example.cims.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int inv_id;
-    private String added_on;
-    private String exp_on;
-    private String item_type;
+    @Column(name = "inv_id")
+    private int invid;
+    @Column(name = "added_on")
+    private String addedon;
+    @Column(name = "exp_on")
+    private String expon;
+    @Column(name = "item_type")
+    private String itemtype;
     private int stock;
 
-    public int getInv_id() {
-        return inv_id;
+    public int getInvid() {
+        return invid;
     }
 
-    public void setInv_id(int inv_id) {
-        this.inv_id = inv_id;
+    public void setInvid(int invid) {
+        this.invid = invid;
     }
 
-    public String getAdded_on() {
-        return added_on;
+    public String getAddedon() {
+        return addedon;
     }
 
-    public void setAdded_on(String added_on) {
-        this.added_on = added_on;
+    public void setAddedon(String addedon) {
+        this.addedon = addedon;
     }
 
-    public String getExp_on() {
-        return exp_on;
+    public String getExpon() {
+        return expon;
     }
 
-    public void setExp_on(String exp_on) {
-        this.exp_on = exp_on;
+    public void setExpon(String expon) {
+        this.expon = expon;
     }
 
-    public String getItem_type() {
-        return item_type;
+    public String getItemtype() {
+        return itemtype;
     }
 
-    public void setItem_type(String item_type) {
-        this.item_type = item_type;
+    public void setItemtype(String itemtype) {
+        this.itemtype = itemtype;
     }
 
     public int getStock() {

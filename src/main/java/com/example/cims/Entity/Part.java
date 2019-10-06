@@ -1,37 +1,37 @@
 package com.example.cims.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Part {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int part_id;
-    private String part_name;
+    @Column(name = "part_id")
+    private int partid;
+    @Column(name = "part_name")
+    private String partname;
     private String brand;
     private String photo;
     private String description;
     private int price;
-    private int inv_id;
+    @Column(name = "inv_id")
+    private int invid;
 
-    public int getPart_id() {
-        return part_id;
+    public int getPartid() {
+        return partid;
     }
 
-    public void setPart_id(int part_id) {
-        this.part_id = part_id;
+    public void setPartid(int partid) {
+        this.partid = partid;
     }
 
-    public String getPart_name() {
-        return part_name;
+    public String getPartname() {
+        return partname;
     }
 
-    public void setPart_name(String part_name) {
-        this.part_name = part_name;
+    public void setPartname(String partname) {
+        this.partname = partname;
     }
 
     public String getBrand() {
@@ -66,11 +66,11 @@ public class Part {
         this.price = price;
     }
 
-    public int getInv_id() {
-        return inv_id;
+    public int getInvid() {
+        return invid;
     }
 
-    public void setInv_id(int inv_id) {
-        this.inv_id = inv_id;
+    public void setInvid(int invid) {
+        this.invid = invid;
     }
 }

@@ -15,13 +15,13 @@ public interface FavouriteRepository extends JpaRepository<Favourite,Integer> {
 
     @Transactional
     @Modifying
-    @Query("delete from Favourite f where f.user_id=:userid and f.inv_id=:invid")
+    @Query("delete from Favourite f where f.userid=:userid and f.invid=:invid")
     int deleteFavourite(@Param("userid") int userid, @Param("invid") int invid);
 
-    @Query("select i.inv_id as inv_id, i.added_on as added_on, i.exp_on as exp_on, i.item_type as item_type, i.stock as stock, c.car_id as car_id, c.plate_no as plate_no, c.brand as brand, c.model as model, c.prod_yr as prod_yr, c.color as color, c.mileage as mileage, c.photo as photo, c.description as description, c.price as price, c.down_payment as down_payment from Inventory i, Favourite f, Car c where f.inv_id=i.inv_id and i.item_type=:filter and i.inv_id=c.inv_id and f.user_id=:userid")
+    @Query("select i.invid, i.addedon, i.expon, i.itemtype, i.stock, c.carid, c.plateno, c.brand, c.model, c.prodyr, c.color, c.mileage, c.photo, c.description, c.price, c.downpayment from Inventory i, Favourite f, Car c where f.invid=i.invid and i.itemtype=:filter and i.invid=c.invid and f.userid=:userid")
     List<Object[]>getUserFavouriteCars(@Param("userid") int userid, @Param("filter") String filter);
 
-    @Query("select i.inv_id, i.added_on, i.exp_on, i.item_type, i.stock, p.part_id, p.part_name, p.brand, p.photo, p.description, p.price from Inventory i, Favourite f, Part p where f.inv_id=i.inv_id and i.item_type=:filter and i.inv_id=p.inv_id  and f.user_id=:userid")
+    @Query("select i.invid, i.addedon, i.expon, i.itemtype, i.stock, p.partid, p.partname, p.brand, p.photo, p.description, p.price from Inventory i, Favourite f, Part p where f.invid=i.invid and i.itemtype=:filter and i.invid=p.invid  and f.userid=:userid")
     List<Object[]>getUserFavouriteParts(@Param("userid") int userid, @Param("filter") String filter);
 
 //    List<FavCarFilter>fetchAllFavouritesOfUser(@Param("userid") int userid, @Param("filter") String filter);

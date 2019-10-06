@@ -7,7 +7,8 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int user_id;
+    @Column(name = "user_id")
+    private int userid;
     @Column(unique = true)
     private String nic;
     private String title;
@@ -17,12 +18,12 @@ public class User {
     private String phone;
     private String address;
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserid() {
+        return userid;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserid(int userid) {
+        this.userid = userid;
     }
 
     public String getNic() {

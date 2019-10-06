@@ -3,62 +3,62 @@ package com.example.cims.model;
 import java.util.Date;
 
 public class PartInventoryResult {
-    private int inv_id;
-    private Date added_on;
-    private Date exp_on;
-    private String item_type;
+    private int invid;
+    private Date addedon;
+    private Date expon;
+    private String itemtype;
     private int stock;
-    private int part_id;
-    private String part_name;
+    private int partid;
+    private String partname;
     private String brand;
     private String photo;
     private String description;
     private int price;
 
-    public PartInventoryResult(int inv_id, Date added_on, Date exp_on, String item_type, int stock, int part_id, String part_name, String brand, String photo, String description, int price) {
-        this.inv_id = inv_id;
-        this.added_on = added_on;
-        this.exp_on = exp_on;
-        this.item_type = item_type;
+    public PartInventoryResult(int invid, Date addedon, Date expon, String itemtype, int stock, int partid, String partname, String brand, String photo, String description, int price) {
+        this.invid = invid;
+        this.addedon = addedon;
+        this.expon = expon;
+        this.itemtype = itemtype;
         this.stock = stock;
-        this.part_id = part_id;
-        this.part_name = part_name;
+        this.partid = partid;
+        this.partname = partname;
         this.brand = brand;
         this.photo = photo;
         this.description = description;
         this.price = price;
     }
 
-    public int getInv_id() {
-        return inv_id;
+    public int getInvid() {
+        return invid;
     }
 
-    public void setInv_id(int inv_id) {
-        this.inv_id = inv_id;
+    public void setInvid(int invid) {
+        this.invid = invid;
     }
 
-    public Date getAdded_on() {
-        return added_on;
+    public Date getAddedon() {
+        return addedon;
     }
 
-    public void setAdded_on(Date added_on) {
-        this.added_on = added_on;
+    public void setAddedon(Date addedon) {
+        this.addedon = addedon;
     }
 
-    public Date getExp_on() {
-        return exp_on;
+    public Date getExpon() {
+        return expon;
     }
 
-    public void setExp_on(Date exp_on) {
-        this.exp_on = exp_on;
+    public void setExpon(Date expon) {
+        this.expon = expon;
     }
 
-    public String getItem_type() {
-        return item_type;
+    public String getItemtype() {
+        return itemtype;
     }
 
-    public void setItem_type(String item_type) {
-        this.item_type = item_type;
+    public void setItemtype(String itemtype) {
+        this.itemtype = itemtype;
     }
 
     public int getStock() {
@@ -69,20 +69,20 @@ public class PartInventoryResult {
         this.stock = stock;
     }
 
-    public int getPart_id() {
-        return part_id;
+    public int getPartid() {
+        return partid;
     }
 
-    public void setPart_id(int part_id) {
-        this.part_id = part_id;
+    public void setPartid(int partid) {
+        this.partid = partid;
     }
 
-    public String getPart_name() {
-        return part_name;
+    public String getPartname() {
+        return partname;
     }
 
-    public void setPart_name(String part_name) {
-        this.part_name = part_name;
+    public void setPartname(String partname) {
+        this.partname = partname;
     }
 
     public String getBrand() {

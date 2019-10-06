@@ -38,33 +38,33 @@ public class InventoryServiceImpl implements InventoryService {
         String currDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
         try{
-            inventory.setAdded_on(currDateTime);
-            inventory.setExp_on(inventoryData.getExp_on());
-            inventory.setItem_type(inventoryData.getItem_type());
+            inventory.setAddedon(currDateTime);
+            inventory.setExpon(inventoryData.getExp_on());
+            inventory.setItemtype(inventoryData.getItem_type());
             inventory.setStock(inventoryData.getStock());
 
             Inventory res_inventory = inventoryRepository.save(inventory);
 
             if(inventoryData.getItem_type().equals("car")){
-                car.setPlate_no(inventoryData.getPlate_no());
+                car.setPlateno(inventoryData.getPlate_no());
                 car.setBrand(inventoryData.getBrand());
                 car.setModel(inventoryData.getModel());
-                car.setProd_yr(inventoryData.getProd_yr());
+                car.setProdyr(inventoryData.getProd_yr());
                 car.setColor(inventoryData.getColor());
                 car.setMileage(inventoryData.getMileage());
                 car.setDescription(inventoryData.getDescription());
                 car.setPrice(inventoryData.getPrice());
-                car.setDown_payment(inventoryData.getDown_payment());
-                car.setInv_id(res_inventory.getInv_id());
+                car.setDownpayment(inventoryData.getDown_payment());
+                car.setInvid(res_inventory.getInvid());
                 carRepository.save(car);
                 response.setMsg("Successfully added the new car to the inventory.");
             }
             else{
-                part.setPart_name(inventoryData.getPart_name());
+                part.setPartname(inventoryData.getPart_name());
                 part.setBrand(inventoryData.getBrand());
                 part.setDescription(inventoryData.getDescription());
                 part.setPrice(inventoryData.getPrice());
-                part.setInv_id(res_inventory.getInv_id());
+                part.setInvid(res_inventory.getInvid());
                 partRepository.save(part);
                 response.setMsg("Successfully added the new part to the inventory.");
             }

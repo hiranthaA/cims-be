@@ -26,8 +26,8 @@ public class FavouriteServiceImpl implements FavouriteService {
         Favourite favourite = new Favourite();
 
         try{
-            favourite.setInv_id(favdata.getInv_id());
-            favourite.setUser_id(favdata.getUser_id());
+            favourite.setInvid(favdata.getInv_id());
+            favourite.setUserid(favdata.getUser_id());
             response.setMsg("Item Successfully Added to Favourites.");
             favouriteRepository.save(favourite);
             return new ResponseEntity<Response>(response, HttpStatus.OK);
@@ -62,7 +62,6 @@ public class FavouriteServiceImpl implements FavouriteService {
     @Override
     public ResponseEntity<Response> getUserFavorites(int userid, String filter) {
         Response response = new Response();
-        Favourite favourite = new Favourite();
         CarInventoryResult carInventoryResult;
         PartInventoryResult partInventoryResult;
         InventoryFilter inventoryFilter = new InventoryFilter();

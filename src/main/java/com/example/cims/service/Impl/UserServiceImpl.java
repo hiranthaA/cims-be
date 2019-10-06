@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
 
         try{
             User user_res = userRepository.save(user);
-            login.setUserId(user_res.getUser_id());
+            login.setUserId(user_res.getUserid());
             Login login_res = loginRepository.save(login);
             response.setMsg("User Successfully Registered.");
             return new ResponseEntity<Response>(response, HttpStatus.CREATED);
