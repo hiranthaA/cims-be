@@ -28,9 +28,16 @@ public class FavouriteServiceImpl implements FavouriteService {
         try{
             favourite.setInvid(favdata.getInv_id());
             favourite.setUserid(favdata.getUser_id());
-            response.setMsg("Item Successfully Added to Favourites.");
-            favouriteRepository.save(favourite);
-            return new ResponseEntity<Response>(response, HttpStatus.OK);
+            Favourite fav = favouriteRepository.findByUseridAndInvid(favdata.getUser_id(),favdata.getInv_id());
+            if(fav==null){
+                favouriteRepository.save(favourite);
+                response.setMsg("Item Successfully Added to Favourites.");
+                return new ResponseEntity<Response>(response, HttpStatus.OK);
+            }
+            else{
+                response.setMsg("Item is already in favourites.");
+                return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
+            }
         }
         catch(Exception e){
             response.setMsg("Sorry! An Exception Occured.");

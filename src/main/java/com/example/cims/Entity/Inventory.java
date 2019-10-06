@@ -16,6 +16,7 @@ public class Inventory {
     @Column(name = "item_type")
     private String itemtype;
     private int stock;
+    private String state;
 
     public int getInvid() {
         return invid;
@@ -55,5 +56,13 @@ public class Inventory {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }
