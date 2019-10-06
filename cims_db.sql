@@ -32,6 +32,10 @@ CREATE TABLE `car` (
   `prod_yr` int(11) DEFAULT NULL,
   `color` varchar(20) DEFAULT NULL,
   `mileage` int(11) DEFAULT NULL,
+  `photo` varchar(100) DEFAULT NULL,
+  `description` varchar(1000) DEFAULT NULL,
+  `price` double DEFAULT NULL,
+  `down_payment` double DEFAULT NULL,
   `inv_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`car_id`),
   KEY `fk_car_inventory` (`inv_id`),
@@ -45,7 +49,37 @@ CREATE TABLE `car` (
 
 LOCK TABLES `car` WRITE;
 /*!40000 ALTER TABLE `car` DISABLE KEYS */;
+INSERT INTO `car` VALUES (5,'ABC-1234','Toyota','Supra',2020,'Red',2503,NULL,'Used, Second Owner.',9500000,1000000,4),(11,'XY-5567','Nissan','GTR',2015,'Black',23568,NULL,'Used, Third Owner.',5500000,1500000,10),(21,'PQR-1133','Mclaren','720s',2018,'Orange',500,NULL,'Brand New, All Options',10500000,4000000,20);
 /*!40000 ALTER TABLE `car` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `favourite`
+--
+
+DROP TABLE IF EXISTS `favourite`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `favourite` (
+  `fav_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `inv_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`fav_id`),
+  KEY `fk_favourite_user` (`user_id`),
+  KEY `fk_favourite_inventory` (`inv_id`),
+  CONSTRAINT `fk_favourite_inventory` FOREIGN KEY (`inv_id`) REFERENCES `inventory` (`inv_id`),
+  CONSTRAINT `fk_favourite_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `favourite`
+--
+
+LOCK TABLES `favourite` WRITE;
+/*!40000 ALTER TABLE `favourite` DISABLE KEYS */;
+INSERT INTO `favourite` VALUES (12,1,10),(19,1,6),(22,1,20),(24,23,20);
+/*!40000 ALTER TABLE `favourite` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -66,7 +100,7 @@ CREATE TABLE `hibernate_sequence` (
 
 LOCK TABLES `hibernate_sequence` WRITE;
 /*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
-INSERT INTO `hibernate_sequence` VALUES (3);
+INSERT INTO `hibernate_sequence` VALUES (25);
 /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,7 +116,7 @@ CREATE TABLE `inventory` (
   `added_on` datetime DEFAULT NULL,
   `exp_on` datetime DEFAULT NULL,
   `item_type` varchar(10) DEFAULT NULL,
-  `remaining` int(11) DEFAULT NULL,
+  `stock` int(11) DEFAULT NULL,
   PRIMARY KEY (`inv_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -93,6 +127,7 @@ CREATE TABLE `inventory` (
 
 LOCK TABLES `inventory` WRITE;
 /*!40000 ALTER TABLE `inventory` DISABLE KEYS */;
+INSERT INTO `inventory` VALUES (4,'2019-10-05 19:15:30',NULL,'car',1),(6,'2019-10-05 19:38:47',NULL,'part',25),(8,'2019-10-05 19:44:41',NULL,'part',5),(10,'2019-10-05 19:51:38',NULL,'car',1),(20,'2019-10-05 22:00:47',NULL,'car',1);
 /*!40000 ALTER TABLE `inventory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,7 +153,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES ('hiranthaathapaththu@gmail.com','123456','admin',1);
+INSERT INTO `login` VALUES ('hiranthaathapaththu@gmail.com','123456','admin',1),('chathurya@gmail.com','123456','cust',23);
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -132,14 +167,11 @@ DROP TABLE IF EXISTS `order_`;
 CREATE TABLE `order_` (
   `order_id` int(11) NOT NULL,
   `order_date` datetime DEFAULT NULL,
-  `inv_id` int(11) DEFAULT NULL,
   `buyer_id` int(11) DEFAULT NULL,
   `pay_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`order_id`),
-  KEY `fk_order_inventory` (`inv_id`),
   KEY `fk_order_user` (`buyer_id`),
   KEY `fk_order_payment` (`pay_id`),
-  CONSTRAINT `fk_order_inventory` FOREIGN KEY (`inv_id`) REFERENCES `inventory` (`inv_id`),
   CONSTRAINT `fk_order_payment` FOREIGN KEY (`pay_id`) REFERENCES `payment` (`pay_id`),
   CONSTRAINT `fk_order_user` FOREIGN KEY (`buyer_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -155,6 +187,31 @@ LOCK TABLES `order_` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `order_item_list`
+--
+
+DROP TABLE IF EXISTS `order_item_list`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `order_item_list` (
+  `order_id` int(11) NOT NULL,
+  `inv_id` int(11) NOT NULL,
+  `amount` int(11) DEFAULT NULL,
+  PRIMARY KEY (`order_id`,`inv_id`),
+  CONSTRAINT `fk_order_item_list_order_` FOREIGN KEY (`order_id`) REFERENCES `order_` (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order_item_list`
+--
+
+LOCK TABLES `order_item_list` WRITE;
+/*!40000 ALTER TABLE `order_item_list` DISABLE KEYS */;
+/*!40000 ALTER TABLE `order_item_list` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `part`
 --
 
@@ -165,6 +222,9 @@ CREATE TABLE `part` (
   `part_id` int(11) NOT NULL,
   `part_name` varchar(50) DEFAULT NULL,
   `brand` varchar(20) DEFAULT NULL,
+  `photo` varchar(100) DEFAULT NULL,
+  `description` varchar(1000) DEFAULT NULL,
+  `price` double DEFAULT NULL,
   `inv_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`part_id`),
   KEY `fk_part_inventory` (`inv_id`),
@@ -178,6 +238,7 @@ CREATE TABLE `part` (
 
 LOCK TABLES `part` WRITE;
 /*!40000 ALTER TABLE `part` DISABLE KEYS */;
+INSERT INTO `part` VALUES (7,'Tyre','Michelin',NULL,'Michelin 70 Series',17500,6),(9,'V8 Engine','Ford',NULL,'V8, 550 HP, Brand New',1850000,8);
 /*!40000 ALTER TABLE `part` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -237,7 +298,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Mr','Hirantha','Athapaththu','941090230V','hiranthaathapaththu@gmail.com','0769065565','Ithanawaththa,Kurunegala');
+INSERT INTO `user` VALUES (1,'Mr','Hirantha','Athapaththu','941090230V','hiranthaathapaththu@gmail.com','0769065565','Ithanawaththa,Kurunegala'),(23,'Ms','Chathurya','Athapaththu','123456789V','chathurya@gmail.com','0712345671','Malkaduwava,Kurunegala');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -258,4 +319,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-05 14:42:11
+-- Dump completed on 2019-10-06 12:14:19

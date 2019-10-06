@@ -57,6 +57,122 @@
 				"description": ""
 			},
 			"response": []
+		},
+		{
+			"name": "AddNewCar",
+			"request": {
+				"url": "localhost:4000/inventory/addnew",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"item_type\":\"car\",\n\t\"stock\":\"1\",\n\t\"plate_no\":\"ABC-1234\",\n\t\"brand\":\"Toyota\",\n\t\"model\":\"Supra\",\n\t\"prod_yr\":\"2020\",\n\t\"color\":\"Red\",\n\t\"mileage\":\"2503\",\n\t\"description\":\"Used, Second Owner.\",\n\t\"price\":\"9500000\",\n\t\"down_payment\":\"1000000\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "AddNewPart",
+			"request": {
+				"url": "localhost:4000/inventory/addnew",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"item_type\":\"part\",\n\t\"stock\":\"5\",\n\t\"part_name\":\"Tyre\",\n\t\"brand\":\"Michelin\",\n\t\"description\":\"Michelin 70 Series\",\n\t\"price\":\"17500\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "AddToFav",
+			"request": {
+				"url": "localhost:4000/favourite/add",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user_id\":\"1\",\n\t\"inv_id\":\"6\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "RemoveFromFav",
+			"request": {
+				"url": "localhost:4000/favourite/remove",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user_id\":\"1\",\n\t\"inv_id\":\"6\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetFavourites",
+			"request": {
+				"url": {
+					"raw": "localhost:4000/favourite/getfav?userid=23&filter=all",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"favourite",
+						"getfav"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "23",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "filter",
+							"value": "all",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Query params\n-------------\nuserid\nfilter : cars | parts | all\n\n\nlocalhost:4000/favourite/getfav?userid=23&filter=all\n\nlocalhost:4000/favourite/getfav?userid=23&filter=parts\n\nlocalhost:4000/favourite/getfav?userid=23&filter=cars"
+			},
+			"response": []
 		}
 	]
 }
