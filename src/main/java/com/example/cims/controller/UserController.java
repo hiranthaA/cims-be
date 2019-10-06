@@ -17,11 +17,17 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * register a new user
+     */
     @RequestMapping(value = "/register", method= RequestMethod.POST)
     public ResponseEntity<Response> register(@RequestBody RegData regdata){
         return  userService.register(regdata);
     }
 
+    /**
+     * fetch all users
+     */
     @RequestMapping(value = "/getall", method= RequestMethod.GET)
     public ResponseEntity<Response> getAll(){
         return  userService.getAll();

@@ -18,6 +18,9 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+    /**
+     * validate user credentials
+     */
     @RequestMapping(value = "/authenticate", method= RequestMethod.POST)
     public ResponseEntity<Response> authenticate(@RequestBody AuthData authdata){
         return  authService.authenticate(authdata);

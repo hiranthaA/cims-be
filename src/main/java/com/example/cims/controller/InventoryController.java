@@ -15,16 +15,30 @@ public class InventoryController {
     @Autowired
     private InventoryService inventoryService;
 
+     /**
+      * add new inventory item
+     */
     @RequestMapping(value = "/addnew", method= RequestMethod.POST)
     public ResponseEntity<Response> addnewItem(@RequestBody InventoryData inventoryData){
         return  inventoryService.addNew(inventoryData);
     }
 
+    /**
+     * get all inventory filter by type
+     *
+     * @Param filter Three types (all,cars,parts).
+     *
+     */
     @RequestMapping(value = "/get", method= RequestMethod.GET)
     public ResponseEntity<Response> getInventory(@RequestParam(required = true) String filter){
         return  inventoryService.getInventory(filter);
     }
 
+    /**
+     * get details of a specific inventory item
+     *
+     * @Param id Inventory item id
+     */
     @RequestMapping(value = "/getitem", method= RequestMethod.GET)
     public ResponseEntity<Response> getInventoryItem(@RequestParam(required = true) int id){
         return  inventoryService.getInventoryItem(id);
