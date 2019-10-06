@@ -7,7 +7,7 @@ import java.util.Date;
         name="FavCarResult",
         classes={
                 @ConstructorResult(
-                        targetClass= FavCarResult.class,
+                        targetClass= CarInventoryResult.class,
                         columns={
                                 @ColumnResult(name="inv_id"),
                                 @ColumnResult(name="added_on", type=Date.class),
@@ -36,7 +36,7 @@ import java.util.Date;
 )
 
 @Entity
-public class FavCarResult {
+public class CarInventoryResult {
 
     @Id
     private int inv_id;
@@ -56,7 +56,7 @@ public class FavCarResult {
     private int price;
     private int down_payment;
 
-    public FavCarResult(int inv_id, Date added_on, Date exp_on, String item_type, int stock, int car_id, String plate_no, String brand, String model, int prod_yr, String color, int mileage, String photo, String description, int price, int down_payment) {
+    public CarInventoryResult(int inv_id, Date added_on, Date exp_on, String item_type, int stock, int car_id, String plate_no, String brand, String model, int prod_yr, String color, int mileage, String photo, String description, int price, int down_payment) {
         this.inv_id = inv_id;
         this.added_on = added_on;
         this.exp_on = exp_on;

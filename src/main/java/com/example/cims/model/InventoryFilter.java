@@ -3,22 +3,22 @@ package com.example.cims.model;
 import java.util.List;
 
 public class InventoryFilter {
-    private List<FavCarResult> cars;
-    private List<FavPartResult> parts;
+    private List<CarInventoryResult> cars;
+    private List<PartInventoryResult> parts;
 
-    public List<FavCarResult> getCars() {
+    public List<CarInventoryResult> getCars() {
         return cars;
     }
 
-    public void setCars(List<FavCarResult> cars) {
+    public void setCars(List<CarInventoryResult> cars) {
         this.cars = cars;
     }
 
-    public List<FavPartResult> getParts() {
+    public List<PartInventoryResult> getParts() {
         return parts;
     }
 
-    public void setParts(List<FavPartResult> parts) {
+    public void setParts(List<PartInventoryResult> parts) {
         this.parts = parts;
     }
 }

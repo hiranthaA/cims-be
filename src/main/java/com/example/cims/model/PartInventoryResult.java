@@ -2,7 +2,7 @@ package com.example.cims.model;
 
 import java.util.Date;
 
-public class FavPartResult {
+public class PartInventoryResult {
     private int inv_id;
     private Date added_on;
     private Date exp_on;
@@ -15,7 +15,7 @@ public class FavPartResult {
     private String description;
     private int price;
 
-    public FavPartResult(int inv_id, Date added_on, Date exp_on, String item_type, int stock, int part_id, String part_name, String brand, String photo, String description, int price) {
+    public PartInventoryResult(int inv_id, Date added_on, Date exp_on, String item_type, int stock, int part_id, String part_name, String brand, String photo, String description, int price) {
         this.inv_id = inv_id;
         this.added_on = added_on;
         this.exp_on = exp_on;

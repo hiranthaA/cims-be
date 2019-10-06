@@ -63,43 +63,43 @@ public class FavouriteServiceImpl implements FavouriteService {
     public ResponseEntity<Response> getUserFavorites(int userid, String filter) {
         Response response = new Response();
         Favourite favourite = new Favourite();
-        FavCarResult favCarResult;
-        FavPartResult favPartResult;
+        CarInventoryResult carInventoryResult;
+        PartInventoryResult partInventoryResult;
         InventoryFilter inventoryFilter = new InventoryFilter();
-        List<FavCarResult> favCarResultList = new ArrayList<>();
-        List<FavPartResult> favPartResultList = new ArrayList<>();
+        List<CarInventoryResult> carInventoryResultList = new ArrayList<>();
+        List<PartInventoryResult> partInventoryResultList = new ArrayList<>();
 
         try{
             if(filter.equals("cars")){
                 List<Object[]> returned = favouriteRepository.getUserFavouriteCars(userid,"car");
                 for(Object[] car : returned){
-                    favCarResult = new FavCarResult((int)car[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[1]),(car[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[2]),(String)car[3],(int)car[4],(int)car[5],(String)car[6],(String)car[7],(String)car[8],(int)car[9],(String)car[10],(int)car[11],(String)car[12],(String)car[13],(int)car[14],(int)car[15]);
-                    favCarResultList.add(favCarResult);
-                    inventoryFilter.setCars(favCarResultList);
+                    carInventoryResult = new CarInventoryResult((int)car[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[1]),(car[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[2]),(String)car[3],(int)car[4],(int)car[5],(String)car[6],(String)car[7],(String)car[8],(int)car[9],(String)car[10],(int)car[11],(String)car[12],(String)car[13],(int)car[14],(int)car[15]);
+                    carInventoryResultList.add(carInventoryResult);
+                    inventoryFilter.setCars(carInventoryResultList);
 
                 }
             }
             else if(filter.equals("parts")){
                 List<Object[]> returned = favouriteRepository.getUserFavouriteParts(userid,"part");
                 for(Object[] part : returned){
-                    favPartResult = new FavPartResult((int)part[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[1]),(part[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[2]),(String)part[3],(int)part[4],(int)part[5],(String)part[6],(String)part[7],(String)part[8],(String)part[9],(int)part[10]);
-                    favPartResultList.add(favPartResult);
-                    inventoryFilter.setParts(favPartResultList);
+                    partInventoryResult = new PartInventoryResult((int)part[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[1]),(part[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[2]),(String)part[3],(int)part[4],(int)part[5],(String)part[6],(String)part[7],(String)part[8],(String)part[9],(int)part[10]);
+                    partInventoryResultList.add(partInventoryResult);
+                    inventoryFilter.setParts(partInventoryResultList);
                 }
             }
             else if(filter.equals("all")){
                 List<Object[]> carsReturned = favouriteRepository.getUserFavouriteCars(userid,"car");
                 for(Object[] car : carsReturned){
-                    favCarResult = new FavCarResult((int)car[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[1]),(car[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[2]),(String)car[3],(int)car[4],(int)car[5],(String)car[6],(String)car[7],(String)car[8],(int)car[9],(String)car[10],(int)car[11],(String)car[12],(String)car[13],(int)car[14],(int)car[15]);
-                    favCarResultList.add(favCarResult);
-                    inventoryFilter.setCars(favCarResultList);
+                    carInventoryResult = new CarInventoryResult((int)car[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[1]),(car[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[2]),(String)car[3],(int)car[4],(int)car[5],(String)car[6],(String)car[7],(String)car[8],(int)car[9],(String)car[10],(int)car[11],(String)car[12],(String)car[13],(int)car[14],(int)car[15]);
+                    carInventoryResultList.add(carInventoryResult);
+                    inventoryFilter.setCars(carInventoryResultList);
 
                 }
                 List<Object[]> partsReturned = favouriteRepository.getUserFavouriteParts(userid,"part");
                 for(Object[] part : partsReturned){
-                    favPartResult = new FavPartResult((int)part[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[1]),(part[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[2]),(String)part[3],(int)part[4],(int)part[5],(String)part[6],(String)part[7],(String)part[8],(String)part[9],(int)part[10]);
-                    favPartResultList.add(favPartResult);
-                    inventoryFilter.setParts(favPartResultList);
+                    partInventoryResult = new PartInventoryResult((int)part[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[1]),(part[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[2]),(String)part[3],(int)part[4],(int)part[5],(String)part[6],(String)part[7],(String)part[8],(String)part[9],(int)part[10]);
+                    partInventoryResultList.add(partInventoryResult);
+                    inventoryFilter.setParts(partInventoryResultList);
                 }
             }
             else{
