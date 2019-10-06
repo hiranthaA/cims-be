@@ -42,6 +42,7 @@ public class InventoryServiceImpl implements InventoryService {
             inventory.setExpon(inventoryData.getExp_on());
             inventory.setItemtype(inventoryData.getItem_type());
             inventory.setStock(inventoryData.getStock());
+            inventory.setState("available");
 
             Inventory res_inventory = inventoryRepository.save(inventory);
 

@@ -52,11 +52,11 @@ public class FavouriteServiceImpl implements FavouriteService {
         try{
             int returned = favouriteRepository.deleteFavourite(favdata.getUser_id(),favdata.getInv_id());
             if(returned==0){
-                response.setMsg("No such item to rermove from favourites.");
+                response.setMsg("No such item in favourites.");
                 return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
             }
             else{
-                response.setMsg("Item successfully rermoved from favourites.");
+                response.setMsg("Item successfully removed from favourites.");
                 return new ResponseEntity<Response>(response, HttpStatus.OK);
             }
         }
