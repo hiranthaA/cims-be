@@ -8,6 +8,7 @@ public class PartInventoryResult {
     private Date expon;
     private String itemtype;
     private int stock;
+    private String state;
     private int partid;
     private String partname;
     private String brand;
@@ -15,12 +16,13 @@ public class PartInventoryResult {
     private String description;
     private int price;
 
-    public PartInventoryResult(int invid, Date addedon, Date expon, String itemtype, int stock, int partid, String partname, String brand, String photo, String description, int price) {
+    public PartInventoryResult(int invid, Date addedon, Date expon, String itemtype, int stock, String state, int partid, String partname, String brand, String photo, String description, int price) {
         this.invid = invid;
         this.addedon = addedon;
         this.expon = expon;
         this.itemtype = itemtype;
         this.stock = stock;
+        this.state = state;
         this.partid = partid;
         this.partname = partname;
         this.brand = brand;
@@ -67,6 +69,14 @@ public class PartInventoryResult {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public int getPartid() {

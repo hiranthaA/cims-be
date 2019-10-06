@@ -88,7 +88,7 @@ public class InventoryServiceImpl implements InventoryService {
             if(filter.equals("cars")){
                 List<Object[]> returned = inventoryRepository.getAllInventoryCars("car");
                 for(Object[] car : returned){
-                    carInventoryResult = new CarInventoryResult((int)car[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[1]),(car[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[2]),(String)car[3],(int)car[4],(int)car[5],(String)car[6],(String)car[7],(String)car[8],(int)car[9],(String)car[10],(int)car[11],(String)car[12],(String)car[13],(int)car[14],(int)car[15]);
+                    carInventoryResult = new CarInventoryResult((int)car[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[1]),(car[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[2]),(String)car[3],(int)car[4],(String)car[5],(int)car[6],(String)car[7],(String)car[8],(String)car[9],(int)car[10],(String)car[11],(int)car[12],(String)car[13],(String)car[14],(int)car[15],(int)car[16]);
                     carInventoryResultList.add(carInventoryResult);
                     inventoryListFilter.setCars(carInventoryResultList);
 
@@ -97,7 +97,7 @@ public class InventoryServiceImpl implements InventoryService {
             else if(filter.equals("parts")){
                 List<Object[]> returned = inventoryRepository.getAllInventoryParts("part");
                 for(Object[] part : returned){
-                    partInventoryResult = new PartInventoryResult((int)part[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[1]),(part[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[2]),(String)part[3],(int)part[4],(int)part[5],(String)part[6],(String)part[7],(String)part[8],(String)part[9],(int)part[10]);
+                    partInventoryResult = new PartInventoryResult((int)part[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[1]),(part[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[2]),(String)part[3],(int)part[4],(String)part[5],(int)part[6],(String)part[7],(String)part[8],(String)part[9],(String)part[10],(int)part[11]);
                     partInventoryResultList.add(partInventoryResult);
                     inventoryListFilter.setParts(partInventoryResultList);
                 }
@@ -105,13 +105,13 @@ public class InventoryServiceImpl implements InventoryService {
             else if(filter.equals("all")){
                 List<Object[]> carsReturned = inventoryRepository.getAllInventoryCars("car");
                 for(Object[] car : carsReturned){
-                    carInventoryResult = new CarInventoryResult((int)car[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[1]),(car[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[2]),(String)car[3],(int)car[4],(int)car[5],(String)car[6],(String)car[7],(String)car[8],(int)car[9],(String)car[10],(int)car[11],(String)car[12],(String)car[13],(int)car[14],(int)car[15]);
+                    carInventoryResult = new CarInventoryResult((int)car[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[1]),(car[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[2]),(String)car[3],(int)car[4],(String)car[5],(int)car[6],(String)car[7],(String)car[8],(String)car[9],(int)car[10],(String)car[11],(int)car[12],(String)car[13],(String)car[14],(int)car[15],(int)car[16]);
                     carInventoryResultList.add(carInventoryResult);
                     inventoryListFilter.setCars(carInventoryResultList);
                 }
                 List<Object[]> partsReturned = inventoryRepository.getAllInventoryParts("part");
                 for(Object[] part : partsReturned){
-                    partInventoryResult = new PartInventoryResult((int)part[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[1]),(part[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[2]),(String)part[3],(int)part[4],(int)part[5],(String)part[6],(String)part[7],(String)part[8],(String)part[9],(int)part[10]);
+                    partInventoryResult = new PartInventoryResult((int)part[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[1]),(part[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[2]),(String)part[3],(int)part[4],(String)part[5],(int)part[6],(String)part[7],(String)part[8],(String)part[9],(String)part[10],(int)part[11]);
                     partInventoryResultList.add(partInventoryResult);
                     inventoryListFilter.setParts(partInventoryResultList);
                 }
@@ -145,7 +145,7 @@ public class InventoryServiceImpl implements InventoryService {
             }
             else if(item.getItemtype().equals("car")){
                 Object[] car = inventoryRepository.getInventoryCar("car",id).get(0);
-                carInventoryResult = new CarInventoryResult((int)car[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[1]),(car[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[2]),(String)car[3],(int)car[4],(int)car[5],(String)car[6],(String)car[7],(String)car[8],(int)car[9],(String)car[10],(int)car[11],(String)car[12],(String)car[13],(int)car[14],(int)car[15]);
+                carInventoryResult = new CarInventoryResult((int)car[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[1]),(car[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[2]),(String)car[3],(int)car[4],(String)car[5],(int)car[6],(String)car[7],(String)car[8],(String)car[9],(int)car[10],(String)car[11],(int)car[12],(String)car[13],(String)car[14],(int)car[15],(int)car[16]);
                 inventoryItemFilter.setCar(carInventoryResult);
                 response.setData(inventoryItemFilter);
                 response.setMsg("Inventory item found.");
@@ -153,7 +153,7 @@ public class InventoryServiceImpl implements InventoryService {
             }
             else {
                 Object[] part = inventoryRepository.getInventoryPart("part",id).get(0);
-                partInventoryResult = new PartInventoryResult((int)part[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[1]),(part[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[2]),(String)part[3],(int)part[4],(int)part[5],(String)part[6],(String)part[7],(String)part[8],(String)part[9],(int)part[10]);
+                partInventoryResult = new PartInventoryResult((int)part[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[1]),(part[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)part[2]),(String)part[3],(int)part[4],(String)part[5],(int)part[6],(String)part[7],(String)part[8],(String)part[9],(String)part[10],(int)part[11]);
                 inventoryItemFilter.setPart(partInventoryResult);
                 response.setData(inventoryItemFilter);
                 response.setMsg("Inventory item found.");

@@ -44,6 +44,7 @@ public class CarInventoryResult {
     private Date expon;
     private String itemtype;
     private int stock;
+    private String state;
     private int car_id;
     private String plateno;
     private String brand;
@@ -56,12 +57,13 @@ public class CarInventoryResult {
     private int price;
     private int downpayment;
 
-    public CarInventoryResult(int invid, Date addedon, Date expon, String itemtype, int stock, int car_id, String plateno, String brand, String model, int prodyr, String color, int mileage, String photo, String description, int price, int downpayment) {
+    public CarInventoryResult(int invid, Date addedon, Date expon, String itemtype, int stock, String state, int car_id, String plateno, String brand, String model, int prodyr, String color, int mileage, String photo, String description, int price, int downpayment) {
         this.invid = invid;
         this.addedon = addedon;
         this.expon = expon;
         this.itemtype = itemtype;
         this.stock = stock;
+        this.state = state;
         this.car_id = car_id;
         this.plateno = plateno;
         this.brand = brand;
@@ -113,6 +115,14 @@ public class CarInventoryResult {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public int getCar_id() {
