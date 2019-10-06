@@ -1,20 +1,27 @@
 package com.example.cims.service.Impl;
 
 import com.example.cims.Entity.Cart;
-import com.example.cims.model.CartData;
-import com.example.cims.model.Response;
+import com.example.cims.Entity.Inventory;
+import com.example.cims.model.*;
 import com.example.cims.repository.CartRepository;
+import com.example.cims.repository.InventoryRepository;
 import com.example.cims.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class CartServiceImpl implements CartService {
 
     @Autowired
     private CartRepository cartRepository;
+    @Autowired
+    private InventoryRepository inventoryRepository;
 
 
     @Override
@@ -52,6 +59,58 @@ public class CartServiceImpl implements CartService {
             }
         }
         catch(Exception e){
+            response.setMsg("Sorry! An Exception Occured.");
+            return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseEntity<Response> getAllCartItems(int userid) {
+        Response response = new Response();
+        CarInventoryResult carInventoryResult;
+        PartInventoryResult partInventoryResult;
+        List<CarInventoryResult> carInventoryResultList = new ArrayList<>();
+        List<PartInventoryResult> partInventoryResultList = new ArrayList<>();
+        InventoryListFilter inventoryListFilter = new InventoryListFilter();
+
+        try{
+            List<Cart> cartList = cartRepository.findAllByUserid(userid);
+
+            for(Cart cItem : cartList){
+                Inventory item = inventoryRepository.findByInvid(cItem.getInvid());
+                if(item==null){
+                    response.setMsg("Sorry! Invalid inventory item found.");
+                    return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+                else if(item.getItemtype().equals("car")){
+                    if(item.getState().equals("deleted")){
+
+                    }
+                    else{
+                        Object[] car = inventoryRepository.getInventoryCar("car",cItem.getInvid()).get(0);
+                        carInventoryResult = new CarInventoryResult((int)car[0],new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[1]),(car[2]==null)? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)car[2]),(String)car[3],(int)car[4],(String)car[5],(int)car[6],(String)car[7],(String)car[8],(String)car[9],(int)car[10],(String)car[11],(int)car[12],(String)car[13],(String)car[14],(int)car[15],(int)car[16]);
+                        carInventoryResultList.add(carInventoryResult);
+                    }
+                }
+                else if(item.getItemtype().equals("part")){
+                    if(item.getState().equals("deleted")){
+
+                    }
+                    else {
+                        Object[] part = inventoryRepository.getInventoryPart("part", cItem.getInvid()).get(0);
+                        partInventoryResult = new PartInventoryResult((int) part[0], new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String) part[1]), (part[2] == null) ? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String) part[2]), (String) part[3], (int) part[4], (String) part[5], (int) part[6], (String) part[7], (String) part[8], (String) part[9], (String) part[10], (int) part[11]);
+                        partInventoryResultList.add(partInventoryResult);
+                    }
+                }
+            }
+            inventoryListFilter.setCars(carInventoryResultList);
+            inventoryListFilter.setParts(partInventoryResultList);
+            response.setData(inventoryListFilter);
+            response.setMsg("Cart items successfully fetched.");
+            return new ResponseEntity<Response>(response, HttpStatus.OK);
+
+        }
+        catch (Exception e){
             response.setMsg("Sorry! An Exception Occured.");
             return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }

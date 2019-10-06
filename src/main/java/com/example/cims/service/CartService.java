@@ -8,4 +8,7 @@ public interface CartService {
     ResponseEntity<Response> addToCart(CartData cartdata);
 
     ResponseEntity<Response> removeFromCart(CartData cartdata);
+
+    ResponseEntity<Response> getAllCartItems(int userid);
+
 }

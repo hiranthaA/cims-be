@@ -7,9 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 public interface CartRepository extends JpaRepository<Cart,Integer> {
 
-    Cart findByUseridAndInvid(int Userid, int invid);
+    Cart findByUseridAndInvid(int userid, int invid);
+
+    List<Cart> findAllByUserid(int userid);
 
     @Transactional
     @Modifying

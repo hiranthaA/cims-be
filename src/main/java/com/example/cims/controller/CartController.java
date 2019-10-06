@@ -15,7 +15,7 @@ public class CartController {
     private CartService cartService;
 
     /**
-     * add item to cart
+     * add an item to the cart
      */
     @RequestMapping(value = "/add", method= RequestMethod.POST)
     public ResponseEntity<Response> addToCart(@RequestBody CartData cartdata){
@@ -23,11 +23,19 @@ public class CartController {
     }
 
     /**
-     * remove a item from cart
+     * remove an item from the cart
      */
     @RequestMapping(value = "/remove", method= RequestMethod.POST)
     public ResponseEntity<Response> removeFromCart(@RequestBody CartData cartdata){
         return  cartService.removeFromCart(cartdata);
+    }
+
+    /**
+     * fetch all cart items
+     */
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    public ResponseEntity<Response> getAllCartItems(@RequestParam(required = true) int userid){
+        return cartService.getAllCartItems(userid);
     }
 
 }
