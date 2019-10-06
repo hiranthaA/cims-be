@@ -5,10 +5,7 @@ import com.example.cims.model.Response;
 import com.example.cims.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -31,6 +28,16 @@ public class UserController {
     @RequestMapping(value = "/getall", method= RequestMethod.GET)
     public ResponseEntity<Response> getAll(){
         return  userService.getAll();
+    }
+
+    /**
+     * fetch a specific users
+     *
+     * @Param userid User id of a specific user
+     */
+    @RequestMapping(value = "/get", method= RequestMethod.GET)
+    public ResponseEntity<Response> getUserDetails(@RequestParam int userid){
+        return  userService.getUserDetails(userid);
     }
 
 

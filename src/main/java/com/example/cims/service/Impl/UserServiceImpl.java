@@ -67,11 +67,33 @@ public class UserServiceImpl implements UserService {
             List<User> userlist = userRepository.findAll();
             response.setData(userlist);
             response.setMsg("Users Successfully Retrieved.");
-            return new ResponseEntity<Response>(response, HttpStatus.CREATED);
+            return new ResponseEntity<Response>(response, HttpStatus.OK);
         }
         catch(Exception e){
             response.setMsg("Sorry! An Exception Occured.");
             return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
+    public ResponseEntity<Response> getUserDetails(int userid) {
+        Response response = new Response();
+
+        try{
+            User user = userRepository.findByuserid(userid);
+            if(user!=null){
+                response.setData(user);
+                response.setMsg("User Successfully Retrieved.");
+                return new ResponseEntity<Response>(response, HttpStatus.OK);
+            }
+            else{
+                response.setMsg("User Not Found.");
+                return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
+            }
+        }
+        catch(Exception e){
+            response.setMsg("Sorry! An Exception Occured.");
+            return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

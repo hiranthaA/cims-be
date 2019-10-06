@@ -10,4 +10,6 @@ public interface UserService {
     ResponseEntity<Response> register(RegData regdata);
 
     ResponseEntity<Response> getAll();
+
+    ResponseEntity<Response> getUserDetails(int userid);
 }
