@@ -333,6 +333,124 @@
 				"description": ""
 			},
 			"response": []
+		},
+		{
+			"name": "UpdateInventoryCar",
+			"request": {
+				"url": {
+					"raw": "localhost:4000/inventory/update?id=4",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"inventory",
+						"update"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "4",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"item_type\":\"car\",\n\t\"stock\":1,\n\t\"exp\":\"\",\n\t\"plate_no\":\"ZZZ-4555\",\n\t\"brand\":\"Suzuki\",\n\t\"model\":\"Swift\",\n\t\"prod_yr\":\"2999\",\n\t\"color\":\"White\",\n\t\"mileage\":\"1111\",\n\t\"description\":\"new desc\",\n\t\"price\":\"999999\",\n\t\"down_payment\":\"555666\"\n}"
+				},
+				"description": "parameters\n-----------\nid : id of the inventory item"
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateInventoryPart",
+			"request": {
+				"url": {
+					"raw": "localhost:4000/inventory/update?id=6",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"inventory",
+						"update"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "6",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"item_type\":\"part\",\n\t\"stock\":10,\n\t\"exp\":\"\",\n\t\"part_name\":\"new part name\",\n\t\"brand\":\"Suzuki\",\n\t\"description\":\"new desc\",\n\t\"price\":\"99\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ChangePassword",
+			"request": {
+				"url": "localhost:4000/auth/changepw",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"userid\":\"1\",\r\n\t\"oldpw\":\"1234567\",\r\n\t\"newpw\":\"123456\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateUser",
+			"request": {
+				"url": "localhost:4000/user/update",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"userid\":\"1\",\r\n\t\"nic\":\"941090230V\",\r\n\t\"title\":\"Mr\",\r\n\t\"fname\":\"Hirantha\",\r\n\t\"lname\":\"Athapaththu\",\r\n\t\"phone\":\"0769065565\",\r\n\t\"address\":\"Ithanawaththa,Kurunegala\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }

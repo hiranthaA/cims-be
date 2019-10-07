@@ -49,7 +49,7 @@ CREATE TABLE `car` (
 
 LOCK TABLES `car` WRITE;
 /*!40000 ALTER TABLE `car` DISABLE KEYS */;
-INSERT INTO `car` VALUES (5,'ABC-1234','Toyota','Supra',2020,'Red',2503,NULL,'Used, Second Owner.',9500000,1000000,4),(11,'XY-5567','Nissan','GTR',2015,'Black',23568,NULL,'Used, Third Owner.',5500000,1500000,10),(21,'PQR-1133','Mclaren','720s',2018,'Orange',500,NULL,'Brand New, All Options',10500000,4000000,20),(37,'QW-4356','Toyota','Corolla',2002,'White',89000,NULL,'Used, Second Owner.',1500000,500000,36);
+INSERT INTO `car` VALUES (5,'ZZZ-4555','Suzuki','Swift',2999,'White',1111,NULL,'new desc',999999,555666,4),(11,'XY-5567','Nissan','GTR',2015,'Black',23568,NULL,'Used, Third Owner.',5500000,1500000,10),(21,'PQR-1133','Mclaren','720s',2018,'Orange',500,NULL,'Brand New, All Options',10500000,4000000,20),(37,'QW-4356','Toyota','Corolla',2002,'White',89000,NULL,'Used, Second Owner.',1500000,500000,36);
 /*!40000 ALTER TABLE `car` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,7 +156,7 @@ CREATE TABLE `inventory` (
 
 LOCK TABLES `inventory` WRITE;
 /*!40000 ALTER TABLE `inventory` DISABLE KEYS */;
-INSERT INTO `inventory` VALUES (4,'2019-10-05 19:15:30',NULL,'car',1,'available'),(6,'2019-10-05 19:38:47',NULL,'part',25,'available'),(8,'2019-10-05 19:44:41',NULL,'part',50,'available'),(10,'2019-10-05 19:51:38',NULL,'car',1,'available'),(20,'2019-10-05 22:00:47',NULL,'car',1,'available'),(36,'2019-10-06 21:25:19',NULL,'car',1,'available');
+INSERT INTO `inventory` VALUES (4,'2019-10-05 19:15:30',NULL,'car',1,'available'),(6,'2019-10-05 19:38:47',NULL,'part',10,'available'),(8,'2019-10-05 19:44:41',NULL,'part',50,'available'),(10,'2019-10-05 19:51:38',NULL,'car',1,'available'),(20,'2019-10-05 22:00:47',NULL,'car',1,'available'),(36,'2019-10-06 21:25:19',NULL,'car',1,'available');
 /*!40000 ALTER TABLE `inventory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -267,7 +267,7 @@ CREATE TABLE `part` (
 
 LOCK TABLES `part` WRITE;
 /*!40000 ALTER TABLE `part` DISABLE KEYS */;
-INSERT INTO `part` VALUES (7,'Tyre','Michelin',NULL,'Michelin 70 Series',17500,6),(9,'V8 Engine','Ford',NULL,'V8, 550 HP, Brand New',1850000,8);
+INSERT INTO `part` VALUES (7,'new part name','Suzuki',NULL,'new desc',99,6),(9,'V8 Engine','Ford',NULL,'V8, 550 HP, Brand New',1850000,8);
 /*!40000 ALTER TABLE `part` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -348,4 +348,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-07  0:45:56
+-- Dump completed on 2019-10-07 21:41:08
