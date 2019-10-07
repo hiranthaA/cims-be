@@ -1,6 +1,7 @@
 package com.example.cims.controller;
 
 import com.example.cims.model.AuthData;
+import com.example.cims.model.Password;
 import com.example.cims.model.RegData;
 import com.example.cims.model.Response;
 import com.example.cims.service.AuthService;
@@ -24,6 +25,14 @@ public class AuthController {
     @RequestMapping(value = "/authenticate", method= RequestMethod.POST)
     public ResponseEntity<Response> authenticate(@RequestBody AuthData authdata){
         return  authService.authenticate(authdata);
+    }
+
+    /**
+     * change password of a existing user
+     */
+    @RequestMapping(value = "/changepw", method= RequestMethod.POST)
+    public ResponseEntity<Response> changePassword(@RequestBody Password password){
+        return  authService.changePassword(password);
     }
 
 }

@@ -4,6 +4,7 @@ import com.example.cims.Entity.Login;
 import com.example.cims.model.RegData;
 import com.example.cims.model.Response;
 import com.example.cims.Entity.User;
+import com.example.cims.model.UserDataUpdated;
 import com.example.cims.repository.LoginRepository;
 import com.example.cims.repository.UserRepository;
 import com.example.cims.service.UserService;
@@ -84,6 +85,41 @@ public class UserServiceImpl implements UserService {
             if(user!=null){
                 response.setData(user);
                 response.setMsg("User Successfully Retrieved.");
+                return new ResponseEntity<Response>(response, HttpStatus.OK);
+            }
+            else{
+                response.setMsg("User Not Found.");
+                return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
+            }
+        }
+        catch(Exception e){
+            response.setMsg("Sorry! An Exception Occured.");
+            return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseEntity<Response> updateExistingUser(UserDataUpdated updatedData) {
+        Response response = new Response();
+        User updatedUser = new User();
+
+        try{
+            User user = userRepository.findByuserid(updatedData.getUserid());
+            if(user!=null){
+
+                updatedUser.setUserid(user.getUserid());
+                updatedUser.setNic(updatedData.getNic());
+                updatedUser.setTitle(updatedData.getTitle());
+                updatedUser.setFname(updatedData.getFname());
+                updatedUser.setLname(updatedData.getLname());
+                updatedUser.setPhone(updatedData.getPhone());
+                updatedUser.setAddress(updatedData.getAddress());
+                updatedUser.setEmail(user.getEmail());
+
+                User result = userRepository.save(updatedUser);
+
+                response.setData(result);
+                response.setMsg("User Successfully Updated.");
                 return new ResponseEntity<Response>(response, HttpStatus.OK);
             }
             else{

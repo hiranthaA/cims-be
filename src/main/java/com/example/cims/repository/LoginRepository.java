@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface LoginRepository extends JpaRepository<Login,Integer> {
 
     Login findByUsername(String username);
+
+    Login findByUserId(int userid);
 }

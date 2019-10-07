@@ -2,6 +2,7 @@ package com.example.cims.controller;
 
 import com.example.cims.model.RegData;
 import com.example.cims.model.Response;
+import com.example.cims.model.UserDataUpdated;
 import com.example.cims.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +41,12 @@ public class UserController {
         return  userService.getUserDetails(userid);
     }
 
-
+    /**
+     * update a existing user
+     */
+    @RequestMapping(value = "/update", method= RequestMethod.POST)
+    public ResponseEntity<Response> updateExistingUser(@RequestBody UserDataUpdated updatedData){
+        return  userService.updateExistingUser(updatedData);
+    }
 
 }

@@ -1,7 +1,9 @@
 package com.example.cims.service.Impl;
 
 import com.example.cims.Entity.Login;
+import com.example.cims.Entity.User;
 import com.example.cims.model.AuthData;
+import com.example.cims.model.Password;
 import com.example.cims.model.Response;
 import com.example.cims.repository.LoginRepository;
 import com.example.cims.repository.UserRepository;
@@ -36,6 +38,44 @@ public class AuthServiceImpl implements AuthService {
             }
             else{
                 response.setMsg("Sorry! Invalid Password.");
+                return new ResponseEntity<Response>(response, HttpStatus.UNAUTHORIZED);
+            }
+        } catch (Exception e) {
+            response.setMsg("Sorry! An Exception Occured.");
+            return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
+    public ResponseEntity<Response> changePassword(Password password) {
+        Response response = new Response();
+        try {
+
+            User user = userRepository.findByuserid(password.getUserid());
+            Login oldlogin = loginRepository.findByUserId(password.getUserid());
+            Login newLogin = new Login();
+
+            if (user==null) {
+                response.setMsg("Sorry! No such user available.");
+                return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
+            }
+            else if(validatePassword(password.getOldpw(),oldlogin.getPassword())){
+                if(validatePassword(password.getNewpw(),oldlogin.getPassword())){
+                    response.setMsg("Sorry! New Password is same as old Password.");
+                    return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
+                }
+                else{
+                    newLogin.setUserId(user.getUserid());
+                    newLogin.setRole(oldlogin.getRole());
+                    newLogin.setUsername(oldlogin.getUsername());
+                    newLogin.setPassword(password.getNewpw());
+                    loginRepository.save(newLogin);
+                    response.setMsg("Password Changed Successfully.");
+                    return new ResponseEntity<Response>(response, HttpStatus.OK);
+                }
+            }
+            else{
+                response.setMsg("Sorry! Invalid old password.");
                 return new ResponseEntity<Response>(response, HttpStatus.UNAUTHORIZED);
             }
         } catch (Exception e) {
