@@ -10,4 +10,8 @@ public interface InventoryService {
     ResponseEntity<Response> getInventory(String filter);
 
     ResponseEntity<Response> getInventoryItem(int id);
+
+    ResponseEntity<Response> deleteInventoryItem(int id);
+
+    ResponseEntity<Response> updateInventoryItem(int id, InventoryData newInvData);
 }

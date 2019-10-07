@@ -44,4 +44,24 @@ public class InventoryController {
         return  inventoryService.getInventoryItem(id);
     }
 
+    /**
+     * delete a specific inventory item
+     *
+     * @Param id Inventory item id
+     */
+    @RequestMapping(value = "/delete", method= RequestMethod.GET)
+    public ResponseEntity<Response> deleteInventoryItem(@RequestParam(required = true) int id){
+        return  inventoryService.deleteInventoryItem(id);
+    }
+
+    /**
+     * update a specific inventory item
+     *
+     * @Param id Inventory item id
+     */
+    @RequestMapping(value = "/update", method= RequestMethod.POST)
+    public ResponseEntity<Response> updateInventoryItem(@RequestParam(required = true) int id, @RequestBody InventoryData newInvData){
+        return  inventoryService.updateInventoryItem(id,newInvData);
+    }
+
 }
