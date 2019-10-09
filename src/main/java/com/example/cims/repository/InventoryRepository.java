@@ -2,9 +2,11 @@ package com.example.cims.repository;
 
 import com.example.cims.Entity.Inventory;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,5 +26,10 @@ public interface InventoryRepository extends JpaRepository<Inventory,Integer> {
     List<Object[]> getInventoryPart(@Param("filter") String filter, @Param("id") int id);
 
     Inventory findByInvid(int invid);
+
+    @Transactional
+    @Modifying
+    @Query("update Inventory set stock=:stock where invid=:invid")
+    int updateStock(@Param("invid") int invid, @Param("stock") int stock);
 
 }

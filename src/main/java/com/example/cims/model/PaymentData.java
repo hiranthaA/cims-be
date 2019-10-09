@@ -3,11 +3,13 @@ package com.example.cims.model;
 public class PaymentData {
     private String card_type;
     private String card_no;
+    private String card_holder;
     private int card_csv;
     private String card_exp;
     private int buyer_id;
     private int[] item_list;
     private int[] quantity_list;
+    private int[] per_unit_price;
 
     public String getCard_type() {
         return card_type;
@@ -63,5 +65,21 @@ public class PaymentData {
 
     public void setQuantity_list(int[] quantity_list) {
         this.quantity_list = quantity_list;
+    }
+
+    public String getCard_holder() {
+        return card_holder;
+    }
+
+    public void setCard_holder(String card_holder) {
+        this.card_holder = card_holder;
+    }
+
+    public int[] getPer_unit_price() {
+        return per_unit_price;
+    }
+
+    public void setPer_unit_price(int[] per_unit_price) {
+        this.per_unit_price = per_unit_price;
     }
 }

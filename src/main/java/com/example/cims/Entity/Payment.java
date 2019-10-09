@@ -12,8 +12,8 @@ public class Payment {
     private String cardtype;
     @Column(name = "card_no")
     private String cardno;
-    @Column(name = "card_owner")
-    private String cardowner;
+    @Column(name = "card_holder")
+    private String cardholder;
     @Column(name = "card_csv")
     private int cardcsv;
     @Column(name = "card_exp_date")
@@ -43,12 +43,12 @@ public class Payment {
         this.cardno = cardno;
     }
 
-    public String getCardowner() {
-        return cardowner;
+    public String getCardholder() {
+        return cardholder;
     }
 
-    public void setCardowner(String cardowner) {
-        this.cardowner = cardowner;
+    public void setCardholder(String cardholder) {
+        this.cardholder = cardholder;
     }
 
     public int getCardcsv() {
