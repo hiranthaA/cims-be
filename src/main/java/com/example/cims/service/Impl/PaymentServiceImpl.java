@@ -131,7 +131,7 @@ public class PaymentServiceImpl implements PaymentService {
                 inventoryRepository.updateStock(itemList[i],inventory.getStock()-quantityList[i]);
             }
 
-            response.setData(pay_result);
+            //response.setData(pay_result);
             response.setMsg("Payment completed successfully.");
             return new ResponseEntity<Response>(response, HttpStatus.OK);
         }

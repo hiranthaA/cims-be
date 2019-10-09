@@ -13,5 +13,5 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     User findByuserid(int userid);
 
     @Query("select u.userid, u.title, u.fname, u.lname, u.nic, u.email, u.phone, u.address from User u, Login l where u.userid=l.userId and l.state=:state")
-    List<User> findUsersByState(@Param("state") String state);
+    List<Object[]> findUsersByState(@Param("state") String state);
 }

@@ -466,7 +466,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"card_type\":\"Visa\",\n\t\"card_no\":\"1234 5678 9101 1121\",\n\t\"card_csv\":\"123\",\n\t\"card_exp\":\"01/23\",\n\t\"buyer_id\":\"1\",\n\t\"item_list\":[6,8,20],\n\t\"quantity_list\":[3,4,1]\n}"
+					"raw": "{\r\n\t\"card_type\":\"Visa\",\r\n\t\"card_no\":\"1234 5678 9101 1121\",\r\n\t\"card_csv\":\"123\",\r\n\t\"card_exp\":\"01/23\",\r\n\t\"card_holder\":\"Hirantha Athapaththu\",\r\n\t\"buyer_id\":\"1\",\r\n\t\"item_list\":[6,8,20],\r\n\t\"quantity_list\":[1,1,1],\r\n\t\"per_unit_price\":[60000,45000,230000]\r\n}"
 				},
 				"description": ""
 			},

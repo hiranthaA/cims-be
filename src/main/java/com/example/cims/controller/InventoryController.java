@@ -1,7 +1,6 @@
 package com.example.cims.controller;
 
 import com.example.cims.model.InventoryData;
-import com.example.cims.model.RegData;
 import com.example.cims.model.Response;
 import com.example.cims.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;

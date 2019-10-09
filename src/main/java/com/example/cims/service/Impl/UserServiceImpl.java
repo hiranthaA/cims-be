@@ -5,6 +5,7 @@ import com.example.cims.model.RegData;
 import com.example.cims.model.Response;
 import com.example.cims.Entity.User;
 import com.example.cims.model.UserDataUpdated;
+import com.example.cims.model.UserResult;
 import com.example.cims.repository.LoginRepository;
 import com.example.cims.repository.UserRepository;
 import com.example.cims.service.UserService;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -64,14 +66,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseEntity<Response> getAll() {
         Response response = new Response();
-
+        UserResult userResult;
+        List<UserResult> userResultList = new ArrayList<>();
         try{
-            List<User> userlist = userRepository.findUsersByState("active");
-            response.setData(userlist);
+            List<Object[]> userlist = userRepository.findUsersByState("active");
+            for(Object[] user : userlist){
+                userResult = new UserResult((int)user[0],(String)user[1],(String)user[2],(String)user[3],(String)user[4],(String)user[5],(String)user[6],(String)user[7]);
+                userResultList.add(userResult);
+            }
+            response.setData(userResultList);
             response.setMsg("Users Successfully Retrieved.");
             return new ResponseEntity<Response>(response, HttpStatus.OK);
         }
         catch(Exception e){
+            e.printStackTrace();
             response.setMsg("Sorry! An Exception Occured.");
             return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
         }
