@@ -451,6 +451,26 @@
 				"description": ""
 			},
 			"response": []
+		},
+		{
+			"name": "PayAnOrder",
+			"request": {
+				"url": "localhost:4000/payment/payorder",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"card_type\":\"Visa\",\n\t\"card_no\":\"1234 5678 9101 1121\",\n\t\"card_csv\":\"123\",\n\t\"card_exp\":\"01/23\",\n\t\"buyer_id\":\"1\",\n\t\"item_list\":[6,8,20],\n\t\"quantity_list\":[3,4,1]\n}"
+				},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }

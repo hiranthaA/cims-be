@@ -40,6 +40,7 @@ public class UserServiceImpl implements UserService {
         login.setUsername(regdata.getEmail());
         login.setPassword(regdata.getPassword());
         login.setRole(regdata.getRole());
+        login.setState("active");
 
         Response response = new Response();
 
@@ -65,7 +66,7 @@ public class UserServiceImpl implements UserService {
         Response response = new Response();
 
         try{
-            List<User> userlist = userRepository.findAll();
+            List<User> userlist = userRepository.findUsersByState("active");
             response.setData(userlist);
             response.setMsg("Users Successfully Retrieved.");
             return new ResponseEntity<Response>(response, HttpStatus.OK);

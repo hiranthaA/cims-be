@@ -171,6 +171,7 @@ CREATE TABLE `login` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
   `role` varchar(255) DEFAULT NULL,
+  `state` varchar(10) DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -182,7 +183,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES ('hiranthaathapaththu@gmail.com','123456','admin',1),('chathurya@gmail.com','123456','cust',23),('geeth@gmail.com','123456','admin',25);
+INSERT INTO `login` VALUES ('hiranthaathapaththu@gmail.com','123456','admin','active',1),('chathurya@gmail.com','123456','cust','active',23),('geeth@gmail.com','123456','admin','active',25);
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -225,7 +226,8 @@ DROP TABLE IF EXISTS `order_item_list`;
 CREATE TABLE `order_item_list` (
   `order_id` int(11) NOT NULL,
   `inv_id` int(11) NOT NULL,
-  `amount` int(11) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `price_per_unit` int(11) DEFAULT NULL,
   PRIMARY KEY (`order_id`,`inv_id`),
   CONSTRAINT `fk_order_item_list_order_` FOREIGN KEY (`order_id`) REFERENCES `order_` (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -282,9 +284,9 @@ CREATE TABLE `payment` (
   `pay_id` int(11) NOT NULL,
   `card_type` varchar(20) DEFAULT NULL,
   `card_no` varchar(20) DEFAULT NULL,
-  `card_owner` varchar(50) DEFAULT NULL,
+  `card_holder` varchar(50) DEFAULT NULL,
   `card_csv` int(11) DEFAULT NULL,
-  `card_exp_date` datetime DEFAULT NULL,
+  `card_exp_date` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`pay_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -348,4 +350,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-07 21:41:08
+-- Dump completed on 2019-10-09  9:20:22

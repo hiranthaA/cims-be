@@ -11,6 +11,7 @@ public class Login {
     private String password;
     private int userId;
     private String role;
+    private String state;
 
     public String getUsername() {
         return username;
@@ -42,5 +43,13 @@ public class Login {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }
