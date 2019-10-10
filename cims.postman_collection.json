@@ -471,6 +471,48 @@
 				"description": ""
 			},
 			"response": []
+		},
+		{
+			"name": "GetOrderDetails",
+			"request": {
+				"url": {
+					"raw": "localhost:4000/order/get?filter=all&from=2019-10-07&to=2019-10-10",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"order",
+						"get"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "all",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "from",
+							"value": "2019-10-07",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "to",
+							"value": "2019-10-10",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }

@@ -128,7 +128,7 @@ CREATE TABLE `hibernate_sequence` (
 
 LOCK TABLES `hibernate_sequence` WRITE;
 /*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
-INSERT INTO `hibernate_sequence` VALUES (39);
+INSERT INTO `hibernate_sequence` VALUES (50);
 /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,7 +156,7 @@ CREATE TABLE `inventory` (
 
 LOCK TABLES `inventory` WRITE;
 /*!40000 ALTER TABLE `inventory` DISABLE KEYS */;
-INSERT INTO `inventory` VALUES (4,'2019-10-05 19:15:30',NULL,'car',1,'available'),(6,'2019-10-05 19:38:47',NULL,'part',10,'available'),(8,'2019-10-05 19:44:41',NULL,'part',50,'available'),(10,'2019-10-05 19:51:38',NULL,'car',1,'available'),(20,'2019-10-05 22:00:47',NULL,'car',1,'available'),(36,'2019-10-06 21:25:19',NULL,'car',1,'available');
+INSERT INTO `inventory` VALUES (4,'2019-10-05 19:15:30',NULL,'car',1,'available'),(6,'2019-10-05 19:38:47',NULL,'part',7,'available'),(8,'2019-10-05 19:44:41',NULL,'part',47,'available'),(10,'2019-10-05 19:51:38',NULL,'car',1,'available'),(20,'2019-10-05 22:00:47',NULL,'car',0,'available'),(36,'2019-10-06 21:25:19',NULL,'car',1,'available');
 /*!40000 ALTER TABLE `inventory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,6 +213,7 @@ CREATE TABLE `order_` (
 
 LOCK TABLES `order_` WRITE;
 /*!40000 ALTER TABLE `order_` DISABLE KEYS */;
+INSERT INTO `order_` VALUES (41,'2019-10-07 22:26:34',1,40),(43,'2019-10-08 22:33:57',1,42),(45,'2019-10-09 22:51:56',1,44),(47,'2019-10-09 22:53:24',23,46),(49,'2019-10-09 23:21:18',25,48);
 /*!40000 ALTER TABLE `order_` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -239,6 +240,7 @@ CREATE TABLE `order_item_list` (
 
 LOCK TABLES `order_item_list` WRITE;
 /*!40000 ALTER TABLE `order_item_list` DISABLE KEYS */;
+INSERT INTO `order_item_list` VALUES (41,6,3,60000),(41,8,4,45000),(41,20,1,230000),(43,6,6,60000),(43,8,4,45000),(43,20,1,230000),(45,6,1,60000),(45,8,1,45000),(45,20,1,230000),(47,6,1,60000),(47,8,1,45000),(47,20,1,230000),(49,6,1,60000),(49,8,1,45000),(49,20,1,230000);
 /*!40000 ALTER TABLE `order_item_list` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -297,6 +299,7 @@ CREATE TABLE `payment` (
 
 LOCK TABLES `payment` WRITE;
 /*!40000 ALTER TABLE `payment` DISABLE KEYS */;
+INSERT INTO `payment` VALUES (40,'Visa','1234 5678 9101 1121','Hirantha Athapaththu',123,'01/23'),(42,'Visa','1234 5678 9101 1121','Hirantha Athapaththu',123,'01/23'),(44,'Visa','1234 5678 9101 1121','Hirantha Athapaththu',123,'01/23'),(46,'Visa','1234 5678 9101 1121','Hirantha Athapaththu',123,'01/23'),(48,'Visa','1234 5678 9101 1121','Hirantha Athapaththu',123,'01/23');
 /*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -350,4 +353,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-09  9:20:22
+-- Dump completed on 2019-10-10 20:40:07
