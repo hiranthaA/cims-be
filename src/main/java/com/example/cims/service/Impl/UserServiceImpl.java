@@ -11,6 +11,7 @@ import com.example.cims.repository.UserRepository;
 import com.example.cims.service.UserService;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -76,7 +77,7 @@ public class UserServiceImpl implements UserService {
             }
             response.setData(userResultList);
             response.setMsg("Users Successfully Retrieved.");
-            return new ResponseEntity<Response>(response, HttpStatus.OK);
+            return new ResponseEntity<Response>(response,HttpStatus.OK);
         }
         catch(Exception e){
             e.printStackTrace();
