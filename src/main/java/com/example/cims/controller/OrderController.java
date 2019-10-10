@@ -23,8 +23,8 @@ public class OrderController {
      * @Param to : Data to filter until
      */
     @RequestMapping(value = "/get", method= RequestMethod.GET)
-    public ResponseEntity<Response> getOrderDetails(@RequestParam(required = false) int userid, @RequestParam(required = true) String filter, @RequestParam(required = true) String from, @RequestParam(required = true) String to){
-        return  orderService.getOrderDetails(userid, filter, from, to);
+    public ResponseEntity<Response> getOrderDetails(@RequestParam(required = false) String userid, @RequestParam(required = true) String filter, @RequestParam(required = true) String from, @RequestParam(required = true) String to){
+        return  orderService.getOrderDetails((userid==null)? 0 : Integer.parseInt(userid), filter, from, to);
     }
 
 }
