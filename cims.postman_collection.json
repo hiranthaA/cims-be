@@ -513,6 +513,42 @@
 				"description": ""
 			},
 			"response": []
+		},
+		{
+			"name": "SearchInventory",
+			"request": {
+				"url": {
+					"raw": "localhost:4000/inventory/search?filter=all&keyword=cor",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"inventory",
+						"search"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "all",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "keyword",
+							"value": "cor",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }
