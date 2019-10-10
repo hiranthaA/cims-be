@@ -14,4 +14,6 @@ public interface InventoryService {
     ResponseEntity<Response> deleteInventoryItem(int id);
 
     ResponseEntity<Response> updateInventoryItem(int id, InventoryData newInvData);
+
+    ResponseEntity<Response> searchInventoryItems(String keyword, String filter);
 }

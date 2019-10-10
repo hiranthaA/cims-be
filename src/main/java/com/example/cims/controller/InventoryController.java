@@ -64,4 +64,15 @@ public class InventoryController {
         return  inventoryService.updateInventoryItem(id,newInvData);
     }
 
+    /**
+     * search for inventory items
+     *
+     * @Param filter : (all,cars,parts)
+     * @Param keyword : keyword searching for
+     */
+    @RequestMapping(value = "/search", method= RequestMethod.GET)
+    public ResponseEntity<Response> searchInventoryItems(@RequestParam(required = true) String keyword, @RequestParam(required = true) String filter){
+        return  inventoryService.searchInventoryItems(keyword,filter);
+    }
+
 }

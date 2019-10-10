@@ -254,4 +254,73 @@ public class InventoryServiceImpl implements InventoryService {
             return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @Override
+    public ResponseEntity<Response> searchInventoryItems(String keyword, String filter) {
+        Response response = new Response();
+        List<CarInventoryResult> carInventoryResultsList = new ArrayList<>();
+        List<PartInventoryResult> partInventoryResultsList = new ArrayList<>();
+        InventoryListFilter inventoryListFilter = new InventoryListFilter();
+
+        try{
+            if(filter.equals("all")){
+                List<Car> carlist = carRepository.findByBrandLikeOrModelLike("%"+keyword+"%","%"+keyword+"%");
+                for(Car car : carlist){
+                    Inventory inventory = inventoryRepository.findByInvid(car.getInvid());
+                    if(inventory.getState().equals("deleted")){
+                        break;
+                    }
+                    CarInventoryResult carInventoryResult = new CarInventoryResult(car.getInvid(),new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(inventory.getAddedon()),inventory.getExpon()==null ? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(inventory.getExpon()),inventory.getItemtype(),inventory.getStock(),inventory.getState(),car.getCarid(),car.getPlateno(),car.getBrand(),car.getModel(),car.getProdyr(),car.getColor(),car.getMileage(),car.getPhoto(),car.getDescription(),car.getPrice(),car.getDownpayment());
+                    carInventoryResultsList.add(carInventoryResult);
+                }
+                inventoryListFilter.setCars(carInventoryResultsList);
+                List<Part> partlist = partRepository.findByBrandLikeOrPartnameLike("%"+keyword+"%","%"+keyword+"%");
+                for(Part part : partlist){
+                    Inventory inventory = inventoryRepository.findByInvid(part.getInvid());
+                    if(inventory.getState().equals("deleted")){
+                        break;
+                    }
+                    PartInventoryResult partInventoryResult = new PartInventoryResult(part.getInvid(),new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(inventory.getAddedon()),inventory.getExpon()==null ? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(inventory.getExpon()),inventory.getItemtype(),inventory.getStock(),inventory.getState(),part.getPartid(),part.getPartname(),part.getBrand(),part.getPhoto(),part.getDescription(),part.getPrice());
+                    partInventoryResultsList.add(partInventoryResult);
+                }
+                inventoryListFilter.setParts(partInventoryResultsList);
+            }
+            else if(filter.equals("cars")){
+                List<Car> carlist = carRepository.findByBrandLikeOrModelLike("%"+keyword+"%","%"+keyword+"%");
+                for(Car car : carlist){
+                    Inventory inventory = inventoryRepository.findByInvid(car.getInvid());
+                    if(inventory.getState().equals("deleted")){
+                        break;
+                    }
+                    CarInventoryResult carInventoryResult = new CarInventoryResult(car.getInvid(),new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(inventory.getAddedon()),inventory.getExpon()==null ? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(inventory.getExpon()),inventory.getItemtype(),inventory.getStock(),inventory.getState(),car.getCarid(),car.getPlateno(),car.getBrand(),car.getModel(),car.getProdyr(),car.getColor(),car.getMileage(),car.getPhoto(),car.getDescription(),car.getPrice(),car.getDownpayment());
+                    carInventoryResultsList.add(carInventoryResult);
+                }
+                inventoryListFilter.setCars(carInventoryResultsList);
+            }
+            else if(filter.equals("parts")){
+                List<Part> partlist = partRepository.findByBrandLikeOrPartnameLike("%"+keyword+"%","%"+keyword+"%");
+                for(Part part : partlist){
+                    Inventory inventory = inventoryRepository.findByInvid(part.getInvid());
+                    if(inventory.getState().equals("deleted")){
+                        break;
+                    }
+                    PartInventoryResult partInventoryResult = new PartInventoryResult(part.getInvid(),new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(inventory.getAddedon()),inventory.getExpon()==null ? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(inventory.getExpon()),inventory.getItemtype(),inventory.getStock(),inventory.getState(),part.getPartid(),part.getPartname(),part.getBrand(),part.getPhoto(),part.getDescription(),part.getPrice());
+                    partInventoryResultsList.add(partInventoryResult);
+                }
+                inventoryListFilter.setParts(partInventoryResultsList);
+            }
+            else{
+                response.setMsg("Sorry! Invalid filter.");
+                return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
+            }
+            response.setData(inventoryListFilter);
+            response.setMsg("Search successfully completed.");
+            return new ResponseEntity<Response>(response, HttpStatus.OK);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            response.setMsg("Sorry! Something went wrong.");
+            return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
