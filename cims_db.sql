@@ -49,7 +49,7 @@ CREATE TABLE `car` (
 
 LOCK TABLES `car` WRITE;
 /*!40000 ALTER TABLE `car` DISABLE KEYS */;
-INSERT INTO `car` VALUES (5,'ZZZ-4555','Suzuki','Swift',2999,'White',1111,NULL,'new desc',999999,555666,4),(11,'XY-5567','Nissan','GTR',2015,'Black',23568,NULL,'Used, Third Owner.',5500000,1500000,10),(21,'PQR-1133','Mclaren','720s',2018,'Orange',500,NULL,'Brand New, All Options',10500000,4000000,20),(37,'QW-4356','Toyota','Corolla',2002,'White',89000,NULL,'Used, Second Owner.',1500000,500000,36);
+INSERT INTO `car` VALUES (5,'ZZZ-4555','Suzuki','Swift',2999,'White',1111,NULL,'new desc',999999,555666,4),(11,'XY-5567','Nissan','GTR',2015,'Black',23568,NULL,'Used, Third Owner.',5500000,1500000,10),(21,'PQR-1133','Mclaren','720s',2018,'Orange',500,NULL,'Brand New, All Options',10500000,4000000,20),(37,'QW-4356','Toyota','Corolla',2002,'White',89000,NULL,'Used, Second Owner.',1500000,500000,36),(57,'ARR-2345','Toyota','Prius',2018,'White',25,'inv_56_1570909366014toyota-prius-2019.jpg','Used, Second Owner.',5000000,1000000,56);
 /*!40000 ALTER TABLE `car` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,7 +77,7 @@ CREATE TABLE `cart` (
 
 LOCK TABLES `cart` WRITE;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
-INSERT INTO `cart` VALUES (1,8,2),(23,4,1),(23,6,7),(23,8,3);
+INSERT INTO `cart` VALUES (1,8,2),(23,4,1),(23,6,7),(23,8,3),(23,56,2);
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,7 +128,7 @@ CREATE TABLE `hibernate_sequence` (
 
 LOCK TABLES `hibernate_sequence` WRITE;
 /*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
-INSERT INTO `hibernate_sequence` VALUES (50);
+INSERT INTO `hibernate_sequence` VALUES (60);
 /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,7 +156,7 @@ CREATE TABLE `inventory` (
 
 LOCK TABLES `inventory` WRITE;
 /*!40000 ALTER TABLE `inventory` DISABLE KEYS */;
-INSERT INTO `inventory` VALUES (4,'2019-10-05 19:15:30',NULL,'car',1,'available'),(6,'2019-10-05 19:38:47',NULL,'part',7,'available'),(8,'2019-10-05 19:44:41',NULL,'part',47,'available'),(10,'2019-10-05 19:51:38',NULL,'car',1,'available'),(20,'2019-10-05 22:00:47',NULL,'car',0,'available'),(36,'2019-10-06 21:25:19',NULL,'car',1,'available');
+INSERT INTO `inventory` VALUES (4,'2019-10-05 19:15:30',NULL,'car',1,'available'),(6,'2019-10-05 19:38:47',NULL,'part',7,'available'),(8,'2019-10-05 19:44:41',NULL,'part',47,'available'),(10,'2019-10-05 19:51:38',NULL,'car',1,'available'),(20,'2019-10-05 22:00:47',NULL,'car',0,'available'),(36,'2019-10-06 21:25:19',NULL,'car',1,'available'),(56,'2019-10-13 01:11:57',NULL,'car',1,'available'),(58,'2019-10-13 01:19:38',NULL,'part',19,'available');
 /*!40000 ALTER TABLE `inventory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -271,7 +271,7 @@ CREATE TABLE `part` (
 
 LOCK TABLES `part` WRITE;
 /*!40000 ALTER TABLE `part` DISABLE KEYS */;
-INSERT INTO `part` VALUES (7,'new part name','Suzuki',NULL,'new desc',99,6),(9,'V8 Engine','Ford',NULL,'V8, 550 HP, Brand New',1850000,8);
+INSERT INTO `part` VALUES (7,'new part name','Suzuki',NULL,'new desc',99,6),(9,'V8 Engine','Ford',NULL,'V8, 550 HP, Brand New',1850000,8),(59,'Engine Oil','Nulon','inv_58_1570909784877_nulon.jpg','1 liter',5000,58);
 /*!40000 ALTER TABLE `part` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -353,4 +353,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-10 20:40:07
+-- Dump completed on 2019-10-13  1:33:20

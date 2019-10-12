@@ -549,6 +549,148 @@
 				"description": ""
 			},
 			"response": []
+		},
+		{
+			"name": "FileUpload",
+			"request": {
+				"url": {
+					"raw": "localhost:4000/upload/image",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"upload",
+						"image"
+					],
+					"query": [
+						{
+							"key": "imageFile",
+							"value": "C:\\Users\\hiran\\OneDrive\\Pictures\\janus_readme.png",
+							"equals": true,
+							"description": "",
+							"disabled": true
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "imageFile",
+							"value": "",
+							"description": "",
+							"type": "file"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "AddNewInventory",
+			"request": {
+				"url": "localhost:4000/inventory/new",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "item_type",
+							"value": "car",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "stock",
+							"value": "1",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "plate_no",
+							"value": "ARR-2345",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "brand",
+							"value": "Toyota",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "model",
+							"value": "Prius",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "prod_yr",
+							"value": "2018",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "color",
+							"value": "White",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "mileage",
+							"value": "25",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "description",
+							"value": "Used, Second Owner.",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "price",
+							"value": "5000000",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "down_payment",
+							"value": "1000000",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "exp_on",
+							"value": "",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "part_name",
+							"value": "",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "imageFile",
+							"value": "",
+							"description": "",
+							"type": "file"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }

@@ -12,7 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -71,6 +75,64 @@ public class InventoryServiceImpl implements InventoryService {
             }
             return new ResponseEntity<Response>(response, HttpStatus.OK);
         } catch (Exception e) {
+            response.setMsg("Sorry! An Exception Occured.");
+            return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
+    public ResponseEntity<Response> addnewInventory(InventoryData inventoryData, MultipartFile imageFile) {
+
+        Response response = new Response();
+        Inventory inventory = new Inventory();
+        Car car = new Car();
+        Part part = new Part();
+        String currDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+
+        try{
+            inventory.setAddedon(currDateTime);
+            inventory.setExpon(inventoryData.getExp_on());
+            inventory.setItemtype(inventoryData.getItem_type());
+            inventory.setStock(inventoryData.getStock());
+            inventory.setState("available");
+
+            Inventory res_inventory = inventoryRepository.save(inventory);
+
+            //save image
+            byte[] bytes = imageFile.getBytes();
+            Path absolutepath = Paths.get(".");
+            String image = "inv_"+res_inventory.getInvid()+"_"+System.currentTimeMillis()+"_"+imageFile.getOriginalFilename();
+            Path path = Paths.get(absolutepath.toAbsolutePath()+"/src/main/webapp/uploads/" + image);
+            Files.write(path,bytes);
+
+            if(inventoryData.getItem_type().equals("car")){
+                car.setPlateno(inventoryData.getPlate_no());
+                car.setBrand(inventoryData.getBrand());
+                car.setModel(inventoryData.getModel());
+                car.setProdyr(inventoryData.getProd_yr());
+                car.setColor(inventoryData.getColor());
+                car.setMileage(inventoryData.getMileage());
+                car.setDescription(inventoryData.getDescription());
+                car.setPrice(inventoryData.getPrice());
+                car.setDownpayment(inventoryData.getDown_payment());
+                car.setInvid(res_inventory.getInvid());
+                car.setPhoto(image);
+                carRepository.save(car);
+                response.setMsg("Successfully added the new car to the inventory.");
+            }
+            else{
+                part.setPartname(inventoryData.getPart_name());
+                part.setBrand(inventoryData.getBrand());
+                part.setDescription(inventoryData.getDescription());
+                part.setPrice(inventoryData.getPrice());
+                part.setInvid(res_inventory.getInvid());
+                part.setPhoto(image);
+                partRepository.save(part);
+                response.setMsg("Successfully added the new part to the inventory.");
+            }
+            return new ResponseEntity<Response>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
             response.setMsg("Sorry! An Exception Occured.");
             return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
         }
