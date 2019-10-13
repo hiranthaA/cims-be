@@ -19,4 +19,6 @@ public interface InventoryService {
     ResponseEntity<Response> searchInventoryItems(String keyword, String filter);
 
     ResponseEntity<Response> addnewInventory(InventoryData inventoryData, MultipartFile imageFile);
+
+    ResponseEntity<Response> updateInventoryItemWithImageUpload(int invid, InventoryData inventoryData, MultipartFile imageFile);
 }

@@ -139,6 +139,87 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
+    public ResponseEntity<Response> updateInventoryItemWithImageUpload(int id, InventoryData newInvData, MultipartFile imageFile) {
+        Response response = new Response();
+        Inventory oldInventory = new Inventory();
+        Inventory updatedInventory = new Inventory();
+        Car updatedCar = new Car();
+        Car oldCar = new Car();
+        Part oldPart = new Part();
+        Part updatedPart = new Part();
+        try{
+            updatedInventory.setExpon(newInvData.getExp_on());
+            updatedInventory.setStock(newInvData.getStock());
+            updatedInventory.setState((newInvData.getStock()>0 ? "available" : "na"));
+            updatedInventory.setInvid(id);
+
+            //save image
+            byte[] bytes = imageFile.getBytes();
+            Path absolutepath = Paths.get(".");
+            String image = "inv_"+id+"_"+System.currentTimeMillis()+"_"+imageFile.getOriginalFilename();
+            Path path = Paths.get(absolutepath.toAbsolutePath()+"/src/main/webapp/uploads/" + image);
+            Files.write(path,bytes);
+
+            oldInventory = inventoryRepository.findByInvid(id);
+            if(oldInventory==null){
+                response.setMsg("Sorry! No such item in the inventory.");
+                return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
+            }
+            else if(oldInventory.getState().equals("deleted")){
+                response.setMsg("Sorry! Item no longer available.");
+                return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
+            }
+            else if(oldInventory.getItemtype().equals("car")){
+                updatedInventory.setAddedon(oldInventory.getAddedon());
+                updatedInventory.setItemtype(oldInventory.getItemtype());
+
+                oldCar = carRepository.findByInvid(id);
+                updatedCar.setInvid(oldCar.getInvid());
+                updatedCar.setCarid(oldCar.getCarid());
+                updatedCar.setBrand(newInvData.getBrand());
+                updatedCar.setColor(newInvData.getColor());
+                updatedCar.setDescription(newInvData.getDescription());
+                updatedCar.setDownpayment(newInvData.getDown_payment());
+                updatedCar.setMileage(newInvData.getMileage());
+                updatedCar.setModel(newInvData.getModel());
+                updatedCar.setPlateno(newInvData.getPlate_no());
+                updatedCar.setPrice(newInvData.getPrice());
+                updatedCar.setProdyr(newInvData.getProd_yr());
+                updatedCar.setPhoto(image);
+                inventoryRepository.save(updatedInventory);
+                carRepository.save(updatedCar);
+                response.setMsg("Successfully updated the car.");
+                return new ResponseEntity<Response>(response, HttpStatus.OK);
+            }
+            else if(oldInventory.getItemtype().equals("part")){
+                updatedInventory.setAddedon(oldInventory.getAddedon());
+                updatedInventory.setItemtype(oldInventory.getItemtype());
+
+                oldPart = partRepository.findByInvid(id);
+                updatedPart.setPartid(oldPart.getPartid());
+                updatedPart.setInvid(oldPart.getInvid());
+                updatedPart.setPartname(newInvData.getPart_name());
+                updatedPart.setBrand(newInvData.getBrand());
+                updatedPart.setDescription(newInvData.getDescription());
+                updatedPart.setPrice(newInvData.getPrice());
+                updatedPart.setPhoto(image);
+                inventoryRepository.save(updatedInventory);
+                partRepository.save(updatedPart);
+                response.setMsg("Successfully updated the part.");
+                return new ResponseEntity<Response>(response, HttpStatus.OK);
+            }
+            else{
+                response.setMsg("Sorry! Something went wrong.");
+                return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+        catch(Exception e){
+            response.setMsg("Sorry! An Exception Occured.");
+            return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
     public ResponseEntity<Response> getInventory(String filter) {
         Response response = new Response();
         CarInventoryResult carInventoryResult;

@@ -104,6 +104,45 @@ public class InventoryController {
     }
 
     /**
+     * update a specific inventory item with image upload
+     *
+     * @Param id Inventory item id
+     */
+    @RequestMapping(value = "/updateitem", method= RequestMethod.POST)
+    public ResponseEntity<Response> updateInventoryItemWithImageUpload(
+            @RequestParam(value = "invid", required = true) int invid,
+            @RequestParam(value = "imageFile", required = true) MultipartFile imageFile,
+            @RequestParam(value = "item_type", required = true) String item_type,
+            @RequestParam(value = "description",required = false) String description,
+            @RequestParam(value = "stock",required = false) Integer stock,
+            @RequestParam(value = "plate_no",required = false) String plate_no,
+            @RequestParam(value = "brand",required = false) String brand,
+            @RequestParam(value = "model",required = false) String model,
+            @RequestParam(value = "prod_yr",required = false) Integer prod_yr,
+            @RequestParam(value = "color",required = false) String color,
+            @RequestParam(value = "mileage",required = false) Integer mileage,
+            @RequestParam(value = "price",required = false) Integer price,
+            @RequestParam(value = "down_payment",required = false) Integer down_payment,
+            @RequestParam(value = "part_name",required = false) String part_name,
+            @RequestParam(value = "exp_on",required = false) String exp_on){
+        InventoryData inventoryData = new InventoryData();
+        inventoryData.setBrand(brand);
+        inventoryData.setColor(color);
+        inventoryData.setDescription(description);
+        inventoryData.setDown_payment((down_payment==null)?0:down_payment);
+        inventoryData.setExp_on(exp_on);
+        inventoryData.setItem_type(item_type);
+        inventoryData.setMileage((mileage==null)?0:mileage);
+        inventoryData.setModel(model);
+        inventoryData.setPart_name(part_name);
+        inventoryData.setPlate_no(plate_no);
+        inventoryData.setPrice((price==null)?0:price);
+        inventoryData.setProd_yr((prod_yr==null)?0:prod_yr);
+        inventoryData.setStock((stock==null)?0:stock);
+        return  inventoryService.updateInventoryItemWithImageUpload(invid,inventoryData,imageFile);
+    }
+
+    /**
      * search for inventory items
      *
      * @Param filter : (all,cars,parts)
