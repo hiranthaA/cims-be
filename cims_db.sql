@@ -49,7 +49,7 @@ CREATE TABLE `car` (
 
 LOCK TABLES `car` WRITE;
 /*!40000 ALTER TABLE `car` DISABLE KEYS */;
-INSERT INTO `car` VALUES (5,'ZZZ-4555','Suzuki','Swift',2999,'White',1111,NULL,'new desc',999999,555666,4),(11,'XY-5567','Nissan','GTR',2015,'Black',23568,NULL,'Used, Third Owner.',5500000,1500000,10),(21,'PQR-1133','Mclaren','720s',2018,'Orange',500,NULL,'Brand New, All Options',10500000,4000000,20),(37,'QW-4356','Toyota','Corolla',2002,'White',89000,NULL,'Used, Second Owner.',1500000,500000,36),(57,'ARR-2345','Toyota','Prius',2018,'White',25,'inv_56_1570909366014toyota-prius-2019.jpg','Used, Second Owner.',5000000,1000000,56);
+INSERT INTO `car` VALUES (5,'ARR-2346','Toyota','Prius',2018,'White',25,'inv_4_1570934562787_1_XbuW8WuRrAY5pC4t-9DZAQ.jpeg','Used, Second Owner.',5000000,1000000,4),(11,'XY-5567','Nissan','GTR',2015,'Black',23568,NULL,'Used, Third Owner.',5500000,1500000,10),(21,'PQR-1133','Mclaren','720s',2018,'Orange',500,NULL,'Brand New, All Options',10500000,4000000,20),(37,'QW-4356','Toyota','Corolla',2002,'White',89000,NULL,'Used, Second Owner.',1500000,500000,36),(57,'ARR-2345','Toyota','Prius',2018,'White',25,'inv_56_1570909366014toyota-prius-2019.jpg','Used, Second Owner.',5000000,1000000,56);
 /*!40000 ALTER TABLE `car` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,7 +128,7 @@ CREATE TABLE `hibernate_sequence` (
 
 LOCK TABLES `hibernate_sequence` WRITE;
 /*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
-INSERT INTO `hibernate_sequence` VALUES (60);
+INSERT INTO `hibernate_sequence` VALUES (62);
 /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -173,8 +173,10 @@ CREATE TABLE `login` (
   `role` varchar(255) DEFAULT NULL,
   `state` varchar(10) DEFAULT NULL,
   `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`username`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`username`),
+  KEY `fk_login_userid_idx` (`user_id`),
+  CONSTRAINT `fk_login_userid` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -183,7 +185,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES ('hiranthaathapaththu@gmail.com','123456','admin','active',1),('chathurya@gmail.com','123456','cust','active',23),('geeth@gmail.com','123456','admin','active',25);
+INSERT INTO `login` VALUES ('chanaka@gmail.com','123456','cust','active',61),('chathurya@gmail.com','123456','cust','active',23),('geeth@gmail.com','123456','admin','active',25),('hiranthaathapaththu@gmail.com','123456','admin','active',1);
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -332,7 +334,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Mr','Hirantha','Athapaththu','941090230V','hiranthaathapaththu@gmail.com','0769065565','Ithanawaththa,Kurunegala'),(23,'Ms','Chathurya','Athapaththu','123456789V','chathurya@gmail.com','0712345671','Malkaduwava,Kurunegala'),(25,'Mr','Geeth','Sameera','941093333V','geeth@gmail.com','0789685457','Kuliyapitiya,Kurunegala');
+INSERT INTO `user` VALUES (1,'Mr','Hirantha','Athapaththu','941090230V','hiranthaathapaththu@gmail.com','0769065565','Ithanawaththa,Kurunegala'),(23,'Ms','Chathurya','Athapaththu','123456789V','chathurya@gmail.com','0712345671','Malkaduwava,Kurunegala'),(25,'Mr','Geeth','Sameera','941093333V','geeth@gmail.com','0789685457','Kuliyapitiya,Kurunegala'),(61,'Mr','Chanaka','Athapaththu','444444444V','chanaka@gmail.com','0778899454','Piduruwella,Kurunegala');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -353,4 +355,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-13  1:33:20
+-- Dump completed on 2019-10-13  8:54:59
