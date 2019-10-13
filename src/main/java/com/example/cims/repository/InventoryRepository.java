@@ -29,7 +29,7 @@ public interface InventoryRepository extends JpaRepository<Inventory,Integer> {
 
     @Transactional
     @Modifying
-    @Query("update Inventory set stock=:stock where invid=:invid")
-    int updateStock(@Param("invid") int invid, @Param("stock") int stock);
+    @Query("update Inventory set stock=:stock,state=:state where invid=:invid")
+    int updateStock(@Param("invid") int invid, @Param("stock") int stock, @Param("state") String state);
 
 }

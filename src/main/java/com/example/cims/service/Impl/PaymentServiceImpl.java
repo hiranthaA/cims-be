@@ -128,7 +128,7 @@ public class PaymentServiceImpl implements PaymentService {
             //deduct quantity from db
             for(int i=0; i<itemList.length;i++){
                 Inventory inventory = inventoryRepository.findByInvid(itemList[i]);
-                inventoryRepository.updateStock(itemList[i],inventory.getStock()-quantityList[i]);
+                inventoryRepository.updateStock(itemList[i],inventory.getStock()-quantityList[i],(inventory.getStock()-quantityList[i]==0?"na":"available"));
             }
 
             //response.setData(pay_result);
