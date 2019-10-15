@@ -4,6 +4,8 @@ import com.example.cims.model.CartData;
 import com.example.cims.model.Response;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public interface CartService {
     ResponseEntity<Response> addToCart(CartData cartdata);
 
@@ -11,4 +13,5 @@ public interface CartService {
 
     ResponseEntity<Response> getAllCartItems(int userid);
 
+    ResponseEntity<Response> removeAListFromCart(List<CartData> cartdata);
 }

@@ -115,4 +115,27 @@ public class CartServiceImpl implements CartService {
             return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @Override
+    public ResponseEntity<Response> removeAListFromCart(List<CartData> cartDataList) {
+        Response response = new Response();
+        try{
+            for(CartData cartdata: cartDataList) {
+                int returned = cartRepository.deleteFromCart(cartdata.getUser_id(), cartdata.getInv_id());
+                if (returned == 0) {
+                    response.setMsg("No such item in the cart.");
+//                    return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
+                } else {
+                    response.setMsg("Item successfully removed from cart.");
+//                    return new ResponseEntity<Response>(response, HttpStatus.OK);
+                }
+            }
+            response.setMsg("Item successfully removed from cart.");
+            return new ResponseEntity<Response>(response, HttpStatus.OK);
+        }
+        catch(Exception e){
+            response.setMsg("Sorry! An Exception Occured.");
+            return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

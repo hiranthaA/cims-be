@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/cart")
@@ -29,6 +31,14 @@ public class CartController {
     @RequestMapping(value = "/remove", method= RequestMethod.POST)
     public ResponseEntity<Response> removeFromCart(@RequestBody CartData cartdata){
         return  cartService.removeFromCart(cartdata);
+    }
+
+    /**
+     * remove a list of items from the cart
+     */
+    @RequestMapping(value = "/removelist", method= RequestMethod.POST)
+    public ResponseEntity<Response> removeAListFromCart(@RequestBody List<CartData> cartdata){
+        return  cartService.removeAListFromCart(cartdata);
     }
 
     /**

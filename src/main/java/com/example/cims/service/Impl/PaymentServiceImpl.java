@@ -7,10 +7,8 @@ import com.example.cims.Entity.Payment;
 import com.example.cims.model.OrderIssue;
 import com.example.cims.model.PaymentData;
 import com.example.cims.model.Response;
-import com.example.cims.repository.InventoryRepository;
-import com.example.cims.repository.OrderItemListRepository;
-import com.example.cims.repository.OrderRepository;
-import com.example.cims.repository.PaymentRepository;
+import com.example.cims.repository.*;
+import com.example.cims.service.CartService;
 import com.example.cims.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,6 +31,8 @@ public class PaymentServiceImpl implements PaymentService {
     private OrderItemListRepository orderItemListRepository;
     @Autowired
     private InventoryRepository inventoryRepository;
+    @Autowired
+    private CartRepository cartRepository;
 
 
     @Override
@@ -129,6 +129,11 @@ public class PaymentServiceImpl implements PaymentService {
             for(int i=0; i<itemList.length;i++){
                 Inventory inventory = inventoryRepository.findByInvid(itemList[i]);
                 inventoryRepository.updateStock(itemList[i],inventory.getStock()-quantityList[i],(inventory.getStock()-quantityList[i]==0?"na":"available"));
+            }
+
+            //removefromcart
+            for(int i=0; i<itemList.length;i++){
+                int returned = cartRepository.deleteFromCart(paymentData.getBuyer_id(),itemList[i]);
             }
 
             //response.setData(pay_result);
