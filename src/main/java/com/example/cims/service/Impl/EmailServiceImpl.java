@@ -89,8 +89,8 @@ public class EmailServiceImpl implements EmailService {
                     "        <table>" +
                     "           <tr>\n" +
                     "              <th style=\"width:200px;text-align: left;\">Item</th>\n" +
-                    "              <th style=\"width:100px\">Quantity</th>\n" +
-                    "              <th style=\"width:200px\">Unit Price (Rs)</th>\n" +
+                    "              <th style=\"width:100px\">Unit Price (Rs)</th>\n" +
+                    "              <th style=\"width:200px\">Quantity</th>\n" +
                     "            </tr>";
             String loopPart = "";
 
