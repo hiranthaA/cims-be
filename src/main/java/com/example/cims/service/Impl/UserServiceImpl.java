@@ -8,6 +8,7 @@ import com.example.cims.model.UserDataUpdated;
 import com.example.cims.model.UserResult;
 import com.example.cims.repository.LoginRepository;
 import com.example.cims.repository.UserRepository;
+import com.example.cims.service.EmailService;
 import com.example.cims.service.UserService;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,8 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private LoginRepository loginRepository;
+    @Autowired
+    private EmailService emailService;
 
     @Override
     public ResponseEntity<Response> register(RegData regdata) {
@@ -51,6 +54,9 @@ public class UserServiceImpl implements UserService {
             User user_res = userRepository.save(user);
             login.setUserId(user_res.getUserid());
             Login login_res = loginRepository.save(login);
+
+            emailService.sendRegistrationSuccessEmail(user,regdata.getRole());
+
             response.setMsg("User Successfully Registered.");
             return new ResponseEntity<Response>(response, HttpStatus.CREATED);
         }
