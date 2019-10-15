@@ -798,6 +798,26 @@
 				"description": ""
 			},
 			"response": []
+		},
+		{
+			"name": "RemoveAListFromCart",
+			"request": {
+				"url": "localhost:4000/cart/removelist",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t{\n\t\t\"user_id\":\"23\",\n\t\t\"inv_id\":\"4\"\n\t},\n\t{\n\t\t\"user_id\":\"23\",\n\t\t\"inv_id\":\"6\"\n\t}\n]"
+				},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }
