@@ -89,7 +89,7 @@ public class EmailServiceImpl implements EmailService {
                     "        <table>" +
                     "           <tr>\n" +
                     "              <th style=\"width:200px;text-align: left;\">Item</th>\n" +
-                    "              <th style=\"width:100px\">Unit Price (Rs)</th>\n" +
+                    "              <th style=\"width:200px\">Unit Price (Rs)</th>\n" +
                     "              <th style=\"width:200px\">Quantity</th>\n" +
                     "            </tr>";
             String loopPart = "";
@@ -98,7 +98,7 @@ public class EmailServiceImpl implements EmailService {
                 for(OrderItemCar car : order.getItems().getCars()){
                     loopPart+=("<tr>\n" +
                             "              <td style=\"width:200px\">"+car.getBrand()+" "+car.getModel()+"</td>\n" +
-                            "              <td style=\"width:100px;\"><center>"+car.getBought_price()+"</center></td>\n" +
+                            "              <td style=\"width:200px;\"><center>"+car.getBought_price()+"</center></td>\n" +
                             "              <td style=\"width:200px\"><center>"+car.getBought_quantity()+"</center></td>\n" +
                             "            </tr>");
                     total += car.getBought_price()*car.getBought_quantity();
@@ -106,7 +106,7 @@ public class EmailServiceImpl implements EmailService {
                 for(OrderItemPart part : order.getItems().getParts()){
                     loopPart+=("<tr>\n" +
                             "              <td style=\"width:200px\">"+part.getBrand()+" "+part.getPartname()+"</td>\n" +
-                            "              <td style=\"width:100px;\"><center>"+part.getBought_price()+"</center></td>\n" +
+                            "              <td style=\"width:200px;\"><center>"+part.getBought_price()+"</center></td>\n" +
                             "              <td style=\"width:200px\"><center>"+part.getBought_quantity()+"</center></td>\n" +
                             "            </tr>");
                     total += part.getBought_price()*part.getBought_quantity();
