@@ -9,6 +9,7 @@ import com.example.cims.model.PaymentData;
 import com.example.cims.model.Response;
 import com.example.cims.repository.*;
 import com.example.cims.service.CartService;
+import com.example.cims.service.EmailService;
 import com.example.cims.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,6 +34,8 @@ public class PaymentServiceImpl implements PaymentService {
     private InventoryRepository inventoryRepository;
     @Autowired
     private CartRepository cartRepository;
+    @Autowired
+    private EmailService emailService;
 
 
     @Override
@@ -136,7 +139,14 @@ public class PaymentServiceImpl implements PaymentService {
                 int returned = cartRepository.deleteFromCart(paymentData.getBuyer_id(),itemList[i]);
             }
 
-            //response.setData(pay_result);
+            //send email
+            Runnable r = new Runnable() {
+                public void run() {
+                    emailService.sendOrderSuccessfulEmail(order_result);
+                }
+            };
+            new Thread(r).start();
+
             response.setMsg("Payment completed successfully.");
             return new ResponseEntity<Response>(response, HttpStatus.OK);
         }

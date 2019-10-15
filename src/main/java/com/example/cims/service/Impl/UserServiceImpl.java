@@ -55,7 +55,12 @@ public class UserServiceImpl implements UserService {
             login.setUserId(user_res.getUserid());
             Login login_res = loginRepository.save(login);
 
-            emailService.sendRegistrationSuccessEmail(user,regdata.getRole());
+            Runnable r = new Runnable() {
+                public void run() {
+                    emailService.sendRegistrationSuccessEmail(user,regdata.getRole());
+                }
+            };
+            new Thread(r).start();
 
             response.setMsg("User Successfully Registered.");
             return new ResponseEntity<Response>(response, HttpStatus.CREATED);

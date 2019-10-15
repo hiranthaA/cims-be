@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -110,6 +111,51 @@ public class OrderServiceImpl implements OrderService {
             e.printStackTrace();
             response.setMsg("Sorry! An Exception Occured.");
             return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public OrderList getOrderDetailsByOrderItem(Order_ orderitem) {
+        List<Order_> orderlist = new ArrayList<>();
+        orderlist.add(orderitem);
+        OrderList orderList = new OrderList();
+        try{
+            for(Order_ order : orderlist){
+                Order o = new Order();
+                o.setOrderId(order.getOrderid());
+                o.setOrderDate(order.getOrderdate());
+                o.setPayId(order.getPayid());
+
+                User buyer = userRepository.findByuserid(order.getBuyerid());
+                o.setBuyer(buyer);
+
+                Items items = new Items();
+
+                List<OrderItemList> itemList = orderItemListRepository.findAllByOrderid(order.getOrderid());
+                for (OrderItemList item : itemList){
+                    Inventory inventory = inventoryRepository.findByInvid(item.getInvid());
+
+                    if(inventory.getItemtype().equals("car")){
+                        Car car = carRepository.findByInvid(inventory.getInvid());
+                        OrderItemCar orderCar = mapCarToOrderItemCar(car);
+                        orderCar.setBought_price(item.getPriceperunit());
+                        orderCar.setBought_quantity(item.getQuantity());
+                        items.getCars().add(orderCar);
+                    }
+                    else if(inventory.getItemtype().equals("part")){
+                        Part part = partRepository.findByInvid(inventory.getInvid());
+                        OrderItemPart orderPart = mapPartToOrderItemPart(part);
+                        orderPart.setBought_price(item.getPriceperunit());
+                        orderPart.setBought_quantity(item.getQuantity());
+                        items.getParts().add(orderPart);
+                    }
+                }
+                o.setItems(items);
+                orderList.getOrderList().add(o);
+            }
+            return orderList;
+        }
+        catch (Exception e){
+            return null;
         }
     }
 

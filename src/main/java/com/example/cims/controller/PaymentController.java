@@ -16,19 +16,11 @@ public class PaymentController {
     @Autowired
     private PaymentService paymentService;
 
-    @Autowired
-    private EmailService emailService;
-
     /**
      * pay for a new order
      */
     @RequestMapping(value = "/payorder", method= RequestMethod.POST)
     public ResponseEntity<Response> addnewPayment(@RequestBody PaymentData paymentData){
         return  paymentService.addNewPayment(paymentData);
-    }
-
-    @RequestMapping(value = "/sendmail", method= RequestMethod.GET)
-    public boolean sendEmail(){
-        return emailService.testSendRegistrationSuccessEmail("adfsfd");
     }
 }
