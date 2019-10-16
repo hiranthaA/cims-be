@@ -112,19 +112,19 @@ public class InventoryController {
     public ResponseEntity<Response> updateInventoryItemWithImageUpload(
             @RequestParam(value = "invid", required = true) int invid,
             @RequestParam(value = "imageFile", required = true) MultipartFile imageFile,
-            @RequestParam(value = "item_type", required = true) String item_type,
+            @RequestParam(value = "itemtype", required = true) String item_type,
             @RequestParam(value = "description",required = false) String description,
             @RequestParam(value = "stock",required = false) Integer stock,
-            @RequestParam(value = "plate_no",required = false) String plate_no,
+            @RequestParam(value = "plateno",required = false) String plate_no,
             @RequestParam(value = "brand",required = false) String brand,
             @RequestParam(value = "model",required = false) String model,
-            @RequestParam(value = "prod_yr",required = false) Integer prod_yr,
+            @RequestParam(value = "prodyr",required = false) Integer prod_yr,
             @RequestParam(value = "color",required = false) String color,
             @RequestParam(value = "mileage",required = false) Integer mileage,
             @RequestParam(value = "price",required = false) Integer price,
             @RequestParam(value = "down_payment",required = false) Integer down_payment,
-            @RequestParam(value = "part_name",required = false) String part_name,
-            @RequestParam(value = "exp_on",required = false) String exp_on){
+            @RequestParam(value = "partname",required = false) String part_name,
+            @RequestParam(value = "expon",required = false) String exp_on){
         InventoryData inventoryData = new InventoryData();
         inventoryData.setBrand(brand);
         inventoryData.setColor(color);
