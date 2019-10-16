@@ -1,18 +1,18 @@
 package com.example.cims.service.Impl;
 
 import com.example.cims.Entity.Login;
+import com.example.cims.Entity.User;
 import com.example.cims.model.RegData;
 import com.example.cims.model.Response;
-import com.example.cims.Entity.User;
 import com.example.cims.model.UserDataUpdated;
 import com.example.cims.model.UserResult;
 import com.example.cims.repository.LoginRepository;
 import com.example.cims.repository.UserRepository;
 import com.example.cims.service.EmailService;
 import com.example.cims.service.UserService;
+import org.apache.commons.codec.binary.Base64;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -44,7 +44,8 @@ public class UserServiceImpl implements UserService {
 
         Login login = new Login();
         login.setUsername(regdata.getEmail());
-        login.setPassword(regdata.getPassword());
+        String encodedPw = new String(Base64.encodeBase64(regdata.getPassword().getBytes()));
+        login.setPassword(encodedPw);
         login.setRole(regdata.getRole());
         login.setState("active");
 

@@ -9,6 +9,7 @@ import com.example.cims.model.Response;
 import com.example.cims.repository.LoginRepository;
 import com.example.cims.repository.UserRepository;
 import com.example.cims.service.AuthService;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -71,7 +72,8 @@ public class AuthServiceImpl implements AuthService {
                     newLogin.setUserId(user.getUserid());
                     newLogin.setRole(oldlogin.getRole());
                     newLogin.setUsername(oldlogin.getUsername());
-                    newLogin.setPassword(password.getNewpw());
+                    String encodedPw = new String(Base64.encodeBase64(password.getNewpw().getBytes()));
+                    newLogin.setPassword(encodedPw);
                     loginRepository.save(newLogin);
                     response.setMsg("Password Changed Successfully.");
                     return new ResponseEntity<Response>(response, HttpStatus.OK);
@@ -88,7 +90,8 @@ public class AuthServiceImpl implements AuthService {
     }
 
     private boolean validatePassword( String req_pw, String db_pw){
-        if(req_pw.equals(db_pw)){
+        String decodedPW = new String(Base64.decodeBase64(db_pw.getBytes()));
+        if(req_pw.equals(decodedPW)){
            return true;
         }
         return false;
