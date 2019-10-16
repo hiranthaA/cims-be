@@ -122,7 +122,7 @@ public class InventoryController {
             @RequestParam(value = "color",required = false) String color,
             @RequestParam(value = "mileage",required = false) Integer mileage,
             @RequestParam(value = "price",required = false) Integer price,
-            @RequestParam(value = "down_payment",required = false) Integer down_payment,
+            @RequestParam(value = "downpayment",required = false) Integer down_payment,
             @RequestParam(value = "partname",required = false) String part_name,
             @RequestParam(value = "expon",required = false) String exp_on){
         InventoryData inventoryData = new InventoryData();
