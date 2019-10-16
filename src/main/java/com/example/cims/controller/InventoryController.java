@@ -111,7 +111,7 @@ public class InventoryController {
     @RequestMapping(value = "/updateitem", method= RequestMethod.POST)
     public ResponseEntity<Response> updateInventoryItemWithImageUpload(
             @RequestParam(value = "invid", required = true) int invid,
-            @RequestParam(value = "imageFile", required = true) MultipartFile imageFile,
+            @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
             @RequestParam(value = "itemtype", required = true) String item_type,
             @RequestParam(value = "description",required = false) String description,
             @RequestParam(value = "stock",required = false) Integer stock,
