@@ -3,6 +3,7 @@ package com.example.cims.service.Impl;
 import com.example.cims.Entity.Login;
 import com.example.cims.Entity.User;
 import com.example.cims.model.AuthData;
+import com.example.cims.model.AuthSuccessResponse;
 import com.example.cims.model.Password;
 import com.example.cims.model.Response;
 import com.example.cims.repository.LoginRepository;
@@ -32,8 +33,10 @@ public class AuthServiceImpl implements AuthService {
                 return new ResponseEntity<Response>(response, HttpStatus.UNAUTHORIZED);
             }
             else if(validatePassword(authdata.getPassword(),res_login.getPassword())){
+                User user = userRepository.findByuserid(res_login.getUserId());
+                AuthSuccessResponse asr = new AuthSuccessResponse(user.getUserid(),user.getNic(),user.getTitle(),user.getFname(),user.getLname(),user.getEmail(),user.getPhone(),user.getAddress(),res_login.getRole());
                 response.setMsg("Successfully Authenticated.");
-                response.setData(userRepository.findById(res_login.getUserId()));
+                response.setData(asr);
                 return new ResponseEntity<Response>(response, HttpStatus.OK);
             }
             else{
