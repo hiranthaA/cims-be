@@ -76,6 +76,7 @@ public class AuthServiceImpl implements AuthService {
                     newLogin.setUserId(user.getUserid());
                     newLogin.setRole(oldlogin.getRole());
                     newLogin.setUsername(oldlogin.getUsername());
+                    newLogin.setState(oldlogin.getState());
                     String encodedPw = new String(Base64.encodeBase64(password.getNewpw().getBytes()));
                     newLogin.setPassword(encodedPw);
                     loginRepository.save(newLogin);
