@@ -89,8 +89,8 @@ public class InventoryController {
      * @Param id Inventory item id
      */
     @RequestMapping(value = "/delete", method= RequestMethod.GET)
-    public ResponseEntity<Response> deleteInventoryItem(@RequestParam(required = true) int id){
-        return  inventoryService.deleteInventoryItem(id);
+    public ResponseEntity<Response> deleteInventoryItem(@RequestParam(required = true) int invid){
+        return  inventoryService.deleteInventoryItem(invid);
     }
 
     /**

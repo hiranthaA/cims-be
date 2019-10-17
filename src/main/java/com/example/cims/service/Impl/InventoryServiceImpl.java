@@ -316,7 +316,15 @@ public class InventoryServiceImpl implements InventoryService {
         try{
             Inventory item = inventoryRepository.findByInvid(id);
 //            Inventory result = inventoryRepository.save()
-            return null;
+            if(item==null){
+                response.setMsg("Sorry! No such item in the database.");
+                return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+            else{
+                inventoryRepository.updateState(id,"deleted");
+                response.setMsg("Inventory item deleted.");
+                return new ResponseEntity<Response>(response, HttpStatus.OK);
+            }
         }
         catch (Exception e){
             response.setMsg("Sorry! An Exception Occured.");
