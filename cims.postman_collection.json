@@ -848,6 +848,36 @@
 				"description": "param: invid"
 			},
 			"response": []
+		},
+		{
+			"name": "DeleteUser",
+			"request": {
+				"url": {
+					"raw": "localhost:4000/user/delete?userid=114",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"user",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "114",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "param : userid"
+			},
+			"response": []
 		}
 	]
 }

@@ -50,4 +50,13 @@ public class UserController {
         return  userService.updateExistingUser(updatedData);
     }
 
+    /**
+     * delete a specific users
+     *
+     * @Param userid User id of a specific user
+     */
+    @RequestMapping(value = "/delete", method= RequestMethod.GET)
+    public ResponseEntity<Response> deleteUser(@RequestParam int userid){
+        return  userService.deleteUser(userid);
+    }
 }

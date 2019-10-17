@@ -15,4 +15,6 @@ public interface UserService {
     ResponseEntity<Response> getUserDetails(int userid);
 
     ResponseEntity<Response> updateExistingUser(UserDataUpdated updatedData);
+
+    ResponseEntity<Response> deleteUser(int userid);
 }

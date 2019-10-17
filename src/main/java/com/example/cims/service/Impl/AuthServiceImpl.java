@@ -33,6 +33,10 @@ public class AuthServiceImpl implements AuthService {
                 response.setMsg("Sorry! No such user available.");
                 return new ResponseEntity<Response>(response, HttpStatus.UNAUTHORIZED);
             }
+            else if(res_login.getState().equals("deleted")){
+                response.setMsg("Sorry! User account is no longer available.");
+                return new ResponseEntity<Response>(response, HttpStatus.UNAUTHORIZED);
+            }
             else if(validatePassword(authdata.getPassword(),res_login.getPassword())){
                 User user = userRepository.findByuserid(res_login.getUserId());
                 AuthSuccessResponse asr = new AuthSuccessResponse(user.getUserid(),user.getNic(),user.getTitle(),user.getFname(),user.getLname(),user.getEmail(),user.getPhone(),user.getAddress(),res_login.getRole());

@@ -154,4 +154,29 @@ public class UserServiceImpl implements UserService {
             return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @Override
+    public ResponseEntity<Response> deleteUser(int userid) {
+        Response response = new Response();
+        try {
+            Login login = loginRepository.findByUserId(userid);
+            if(login==null){
+                response.setMsg("Sorry! No such user available.");
+                return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
+            }
+            if(login.getState().equals("deleted")){
+                response.setMsg("Sorry! User account is no longer available.");
+                return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
+            }
+            else {
+                loginRepository.updateState(userid,"deleted");
+                response.setMsg("User successfully deleted");
+                return new ResponseEntity<Response>(response, HttpStatus.OK);
+            }
+        }
+        catch(Exception e){
+            response.setMsg("Sorry! An Exception Occured.");
+            return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
