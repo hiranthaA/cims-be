@@ -7,11 +7,13 @@ import com.example.cims.model.*;
 import com.example.cims.repository.CarRepository;
 import com.example.cims.repository.InventoryRepository;
 import com.example.cims.repository.PartRepository;
+import com.example.cims.service.FileStorageService;
 import com.example.cims.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Files;
@@ -31,6 +33,8 @@ public class InventoryServiceImpl implements InventoryService {
     private CarRepository carRepository;
     @Autowired
     private PartRepository partRepository;
+    @Autowired
+    private FileStorageService fileStorageService;
 
     @Override
     public ResponseEntity<Response> addNew(InventoryData inventoryData) {
@@ -99,11 +103,8 @@ public class InventoryServiceImpl implements InventoryService {
             Inventory res_inventory = inventoryRepository.save(inventory);
 
             //save image
-            byte[] bytes = imageFile.getBytes();
-            Path absolutepath = Paths.get(".");
-            String image = "inv_"+res_inventory.getInvid()+"_"+System.currentTimeMillis()+"_"+imageFile.getOriginalFilename();
-            Path path = Paths.get(absolutepath.toAbsolutePath()+"/src/main/webapp/uploads/" + image);
-            Files.write(path,bytes);
+            String imagename = "inv_"+res_inventory.getInvid()+"_"+System.currentTimeMillis()+"_"+imageFile.getOriginalFilename();
+            fileStorageService.storeFile(imageFile, StringUtils.cleanPath(imagename));
 
             if(inventoryData.getItem_type().equals("car")){
                 car.setPlateno(inventoryData.getPlate_no());
@@ -116,7 +117,7 @@ public class InventoryServiceImpl implements InventoryService {
                 car.setPrice(inventoryData.getPrice());
                 car.setDownpayment(inventoryData.getDown_payment());
                 car.setInvid(res_inventory.getInvid());
-                car.setPhoto(image);
+                car.setPhoto(imagename);
                 carRepository.save(car);
                 response.setMsg("Successfully added the new car to the inventory.");
             }
@@ -126,7 +127,7 @@ public class InventoryServiceImpl implements InventoryService {
                 part.setDescription(inventoryData.getDescription());
                 part.setPrice(inventoryData.getPrice());
                 part.setInvid(res_inventory.getInvid());
-                part.setPhoto(image);
+                part.setPhoto(imagename);
                 partRepository.save(part);
                 response.setMsg("Successfully added the new part to the inventory.");
             }
@@ -148,7 +149,7 @@ public class InventoryServiceImpl implements InventoryService {
         Part oldPart = new Part();
         Part updatedPart = new Part();
         boolean noimage=false;
-        String image = null;
+        String imagename = null;
         try{
             updatedInventory.setExpon(newInvData.getExp_on());
             updatedInventory.setStock(newInvData.getStock());
@@ -160,11 +161,8 @@ public class InventoryServiceImpl implements InventoryService {
                 noimage = true;
             }
             else{
-                byte[] bytes = imageFile.getBytes();
-                Path absolutepath = Paths.get(".");
-                image = "inv_"+id+"_"+System.currentTimeMillis()+"_"+imageFile.getOriginalFilename();
-                Path path = Paths.get(absolutepath.toAbsolutePath()+"/src/main/webapp/uploads/" + image);
-                Files.write(path,bytes);
+                imagename = "inv_"+id+"_"+System.currentTimeMillis()+"_"+imageFile.getOriginalFilename();
+                fileStorageService.storeFile(imageFile, StringUtils.cleanPath(imagename));
             }
 
             oldInventory = inventoryRepository.findByInvid(id);
@@ -192,7 +190,7 @@ public class InventoryServiceImpl implements InventoryService {
                 updatedCar.setPlateno(newInvData.getPlate_no());
                 updatedCar.setPrice(newInvData.getPrice());
                 updatedCar.setProdyr(newInvData.getProd_yr());
-                updatedCar.setPhoto(noimage?oldCar.getPhoto():image);
+                updatedCar.setPhoto(noimage?oldCar.getPhoto():imagename);
                 inventoryRepository.save(updatedInventory);
                 carRepository.save(updatedCar);
                 response.setMsg("Successfully updated the car.");
@@ -209,7 +207,7 @@ public class InventoryServiceImpl implements InventoryService {
                 updatedPart.setBrand(newInvData.getBrand());
                 updatedPart.setDescription(newInvData.getDescription());
                 updatedPart.setPrice(newInvData.getPrice());
-                updatedPart.setPhoto(noimage?oldPart.getPhoto():image);
+                updatedPart.setPhoto(noimage?oldPart.getPhoto():imagename);
                 inventoryRepository.save(updatedInventory);
                 partRepository.save(updatedPart);
                 response.setMsg("Successfully updated the part.");
