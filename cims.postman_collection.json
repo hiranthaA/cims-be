@@ -554,14 +554,14 @@
 			"name": "FileUpload",
 			"request": {
 				"url": {
-					"raw": "localhost:4000/upload/image",
+					"raw": "localhost:4000/files/uploadFile",
 					"host": [
 						"localhost"
 					],
 					"port": "4000",
 					"path": [
-						"upload",
-						"image"
+						"files",
+						"uploadFile"
 					],
 					"query": [
 						{
@@ -580,10 +580,10 @@
 					"mode": "formdata",
 					"formdata": [
 						{
-							"key": "imageFile",
-							"value": "",
+							"key": "file",
 							"description": "",
-							"type": "file"
+							"type": "file",
+							"src": "crane (2).jpg"
 						}
 					]
 				},
